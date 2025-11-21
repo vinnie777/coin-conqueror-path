@@ -36,33 +36,33 @@ const Index = () => {
       <section className="container mx-auto px-2 sm:px-4 py-8 sm:py-16 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
           <div className="inline-block">
-            <span className="px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white border-3 sm:border-4 border-gray-800 text-sm sm:text-base font-black text-gray-800 shadow-2xl animate-float">
+            <span className="px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-accent/20 border-2 border-accent text-xs sm:text-sm font-bold text-foreground shadow-lg">
               🎮 L'éducation financière gamifiée
             </span>
           </div>
           
-          <div className="inline-block bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 px-6 sm:px-10 py-4 sm:py-8 rounded-2xl sm:rounded-3xl border-3 sm:border-4 border-green-800 shadow-2xl transform -rotate-1">
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white leading-tight" style={{ textShadow: '3px 3px 0px rgba(0,0,0,0.3)' }}>
+          <div className="inline-block bg-gradient-to-r from-primary via-secondary to-primary px-4 sm:px-8 py-3 sm:py-6 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-primary shadow-2xl transform -rotate-1">
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-white leading-tight" style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.2)' }}>
               Transforme ton<br />
               Apprentissage Financier<br />
               en Aventure
             </h2>
           </div>
           
-          <div className="bg-white rounded-2xl sm:rounded-3xl border-3 sm:border-4 border-gray-800 shadow-2xl p-5 sm:p-8 max-w-2xl mx-auto hover:scale-105 transition-all duration-300">
-            <p className="text-base sm:text-xl text-gray-800 font-black leading-relaxed">
+          <div className="bg-white rounded-xl sm:rounded-2xl border-2 sm:border-4 border-border shadow-2xl p-4 sm:p-6 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-lg text-foreground font-bold">
               Parcours une carte interactive, complète des défis quotidiens et deviens un expert de la finance tout en t'amusant.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center pt-2 sm:pt-4 px-4">
             <Link to="/map" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-black border-3 sm:border-4 border-green-700 shadow-2xl hover:scale-110 transition-all duration-300 text-lg sm:text-2xl px-8 sm:px-12 py-6 sm:py-8">
+              <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-black border-2 sm:border-4 border-primary shadow-2xl text-base sm:text-xl px-6 sm:px-10 py-5 sm:py-7">
                 ▶ COMMENCER L'AVENTURE
               </Button>
             </Link>
             <Link to="/dashboard" className="w-full sm:w-auto hidden sm:block">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto font-black border-3 sm:border-4 border-gray-800 shadow-2xl text-lg sm:text-2xl px-8 sm:px-12 py-6 sm:py-8 bg-white hover:bg-gray-50 hover:scale-105 transition-all duration-300">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto font-bold border-2 sm:border-4 border-border shadow-xl text-base sm:text-xl px-6 sm:px-10 py-5 sm:py-7 bg-white">
                 📊 Tableau de bord
               </Button>
             </Link>
@@ -71,19 +71,19 @@ const Index = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 pt-6 sm:pt-10 max-w-3xl mx-auto">
             {[
-              { icon: MapPin, label: "7 Zones", value: "à explorer", gradient: "from-blue-500 to-blue-700" },
-              { icon: Trophy, label: "Défis", value: "quotidiens", gradient: "from-yellow-500 to-orange-600" },
-              { icon: Coins, label: "InvestCoins", value: "à gagner", gradient: "from-green-500 to-emerald-600" },
-              { icon: TrendingUp, label: "Classement", value: "en temps réel", gradient: "from-purple-500 to-pink-600" }
+              { icon: MapPin, label: "7 Zones", value: "à explorer", gradient: "from-primary to-primary" },
+              { icon: Trophy, label: "Défis", value: "quotidiens", gradient: "from-secondary to-secondary" },
+              { icon: Coins, label: "InvestCoins", value: "à gagner", gradient: "from-accent to-accent" },
+              { icon: TrendingUp, label: "Classement", value: "en temps réel", gradient: "from-primary to-secondary" }
             ].map((stat, i) => (
               <div 
                 key={i} 
-                className={`p-4 sm:p-6 rounded-2xl bg-gradient-to-br ${stat.gradient} border-3 sm:border-4 border-gray-800 shadow-2xl transition-all duration-300 hover:scale-110 animate-slide-up`}
+                className={`p-3 sm:p-6 rounded-xl bg-gradient-to-br ${stat.gradient} border-2 sm:border-4 border-border shadow-2xl transition-all duration-300 hover:scale-110 animate-slide-up`}
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white mb-2 sm:mb-3 mx-auto drop-shadow-lg" />
-                <div className="text-xl sm:text-3xl font-black text-white drop-shadow-lg">{stat.label}</div>
-                <div className="text-sm sm:text-base text-white/90 font-black">{stat.value}</div>
+                <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-2 sm:mb-3 mx-auto" />
+                <div className="text-base sm:text-xl font-black text-white">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-white/90 font-bold">{stat.value}</div>
               </div>
             ))}
           </div>
@@ -125,23 +125,23 @@ const Index = () => {
             ].map((feature, i) => (
               <div 
                 key={i}
-                className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border-3 sm:border-4 border-gray-800 shadow-2xl transition-all duration-300 hover:scale-105 animate-scale-in group"
+                className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-white border-2 sm:border-4 border-border shadow-2xl transition-all duration-300 hover:scale-105 animate-scale-in group"
                 style={{ animationDelay: `${i * 0.15}s` }}
               >
-                <div className="relative h-40 sm:h-56 overflow-hidden">
+                <div className="relative h-32 sm:h-48 overflow-hidden">
                   <img 
                     src={feature.image} 
                     alt={feature.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                  <div className={`absolute top-3 left-3 sm:top-4 sm:left-4 w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white font-black text-2xl sm:text-3xl shadow-2xl border-3 sm:border-4 border-white animate-float`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  <div className={`absolute top-2 left-2 sm:top-4 sm:left-4 w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white font-black text-xl sm:text-2xl shadow-2xl border-2 sm:border-4 border-white`}>
                     {feature.step}
                   </div>
                 </div>
-                <div className="p-5 sm:p-8 bg-white">
-                  <h4 className="text-xl sm:text-3xl font-black text-gray-800 mb-2 sm:mb-4">{feature.title}</h4>
-                  <p className="text-sm sm:text-lg text-gray-700 font-bold leading-relaxed">{feature.description}</p>
+                <div className="p-4 sm:p-6 bg-white">
+                  <h4 className="text-lg sm:text-2xl font-black text-foreground mb-2 sm:mb-3">{feature.title}</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground font-semibold leading-relaxed">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -150,36 +150,30 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-20 relative z-10">
+      <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-16 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="p-8 sm:p-16 rounded-3xl sm:rounded-[3rem] bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 border-3 sm:border-4 border-purple-800 shadow-2xl relative overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-            
-            <div className="relative z-10">
-              <div className="inline-block bg-white rounded-2xl sm:rounded-3xl border-3 sm:border-4 border-gray-800 shadow-2xl px-6 sm:px-12 py-3 sm:py-6 mb-6 sm:mb-8 animate-pulse-glow">
-                <h3 className="text-2xl sm:text-4xl font-black text-gray-800" style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.1)' }}>
-                  Prêt à devenir un expert financier ?
-                </h3>
-              </div>
-              <p className="text-base sm:text-2xl text-white font-black mb-8 sm:mb-12 px-2 drop-shadow-2xl">
-                Rejoins des milliers d'utilisateurs qui transforment leur avenir financier chaque jour.
-              </p>
-              <Link to="/map">
-                <Button size="lg" className="bg-white hover:bg-gray-50 text-gray-800 font-black border-3 sm:border-4 border-gray-800 shadow-2xl text-xl sm:text-3xl px-10 sm:px-16 py-7 sm:py-10 hover:scale-110 transition-all duration-300">
-                  🚀 DÉMARRER MAINTENANT
-                </Button>
-              </Link>
+          <div className="p-6 sm:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary via-secondary to-accent border-2 sm:border-4 border-primary shadow-2xl">
+            <div className="inline-block bg-white rounded-xl sm:rounded-2xl border-2 sm:border-4 border-border shadow-xl px-4 sm:px-8 py-2 sm:py-4 mb-4 sm:mb-6">
+              <h3 className="text-xl sm:text-3xl font-black text-foreground" style={{ textShadow: '1px 1px 0px rgba(0,0,0,0.1)' }}>
+                Prêt à devenir un expert financier ?
+              </h3>
             </div>
+            <p className="text-sm sm:text-lg text-white font-bold mb-6 sm:mb-8 px-2 drop-shadow-lg">
+              Rejoins des milliers d'utilisateurs qui transforment leur avenir financier chaque jour.
+            </p>
+            <Link to="/map">
+              <Button size="lg" className="bg-white hover:bg-white/90 text-primary font-black border-2 sm:border-4 border-white shadow-2xl text-base sm:text-xl px-8 sm:px-12 py-5 sm:py-7">
+                ▶ DÉMARRER MAINTENANT
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t-3 sm:border-t-4 border-gray-800 bg-white/90 backdrop-blur-sm py-8 sm:py-10 relative z-10">
+      <footer className="border-t-2 sm:border-t-4 border-border bg-white backdrop-blur-sm py-6 sm:py-8 relative z-10">
         <div className="container mx-auto px-2 sm:px-4 text-center">
-          <p className="text-sm sm:text-lg font-black text-gray-800">© 2024 Edufin360. Transforme ton apprentissage financier en aventure. 🚀</p>
+          <p className="text-xs sm:text-base font-bold text-foreground">© 2024 Edufin360. Transforme ton apprentissage financier en aventure.</p>
         </div>
       </footer>
     </div>
