@@ -109,17 +109,8 @@ const Index = () => {
             <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
               Flow
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground font-medium">L'éducation financière gamifiée</p>
           </div>
           
-          <div className="mb-8">
-            <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold text-foreground leading-tight">
-              Transforme ton<br />
-              Apprentissage Financier<br />
-              en Aventure
-            </h2>
-          </div>
-
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center pt-4 sm:pt-6 px-4">
             <Link to="/map" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-premium text-base sm:text-xl px-6 sm:px-10 py-5 sm:py-7">
