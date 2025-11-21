@@ -10,14 +10,18 @@ import zone3 from "@/assets/zone3-forest.png";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Fixed News Button */}
+      <Link to="/news" className="fixed top-4 left-4 z-50">
+        <div className="bg-black border-2 border-yellow-400 px-4 py-2 rounded-lg shadow-lg hover:bg-black/90 transition-colors">
+          <span className="text-white font-semibold">News</span>
+        </div>
+      </Link>
+
       {/* Navigation */}
       <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
           <img src={bnpLogo} alt="BNP Paribas" className="h-12 sm:h-16" />
           <div className="flex gap-2 sm:gap-3">
-            <Link to="/news">
-              <Button variant="outline" className="font-semibold">News</Button>
-            </Link>
             <Link to="/auth">
               <Button variant="outline" className="font-semibold">Connexion</Button>
             </Link>
