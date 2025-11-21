@@ -11,7 +11,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Fixed News Button */}
-      <Link to="/news" className="fixed top-4 left-4 z-50">
+      <Link to="/news" className="fixed top-20 left-4 z-50">
         <div className="bg-black border-2 border-yellow-400 px-4 py-2 rounded-lg shadow-lg hover:bg-black/90 transition-colors">
           <span className="text-white font-semibold">News</span>
         </div>
