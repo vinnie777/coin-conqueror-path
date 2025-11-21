@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, TrendingUp, TrendingDown, Users, Trophy } from "lucide-react";
+import { ArrowLeft, TrendingUp, TrendingDown, Users, Coins } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useState } from "react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const Portfolio = () => {
   const [investedCoins, setInvestedCoins] = useState(500);
@@ -17,6 +18,17 @@ const Portfolio = () => {
     { name: "Obligations", amount: 50, performance: 4.1, color: "text-primary" }
   ];
 
+  const performanceData = [
+    { date: "Sem 1", coins: 1000 },
+    { date: "Sem 2", coins: 1050 },
+    { date: "Sem 3", coins: 1100 },
+    { date: "Sem 4", coins: 1080 },
+    { date: "Sem 5", coins: 1150 },
+    { date: "Sem 6", coins: 1200 },
+    { date: "Sem 7", coins: 1180 },
+    { date: "Sem 8", coins: 1250 }
+  ];
+
   const globalRanking = [
     { rank: 1, name: "Marie D.", coins: 5850, trend: "up" },
     { rank: 2, name: "Thomas L.", coins: 5720, trend: "up" },
@@ -26,26 +38,19 @@ const Portfolio = () => {
   ];
 
   const friendsRanking = [
-    { rank: 1, name: "Alex M.", coins: 1850, avatar: "👨" },
-    { rank: 2, name: "Toi", coins: 1250, avatar: "😊", isUser: true },
-    { rank: 3, name: "Julie K.", coins: 980, avatar: "👩" },
-    { rank: 4, name: "Marc P.", coins: 750, avatar: "👨" }
+    { rank: 1, name: "Alex M.", coins: 1850 },
+    { rank: 2, name: "Toi", coins: 1250, isUser: true },
+    { rank: 3, name: "Julie K.", coins: 980 },
+    { rank: 4, name: "Marc P.", coins: 750 }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-sky-200 to-green-100 relative overflow-hidden">
-      {/* Decorative clouds */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-16 bg-white/60 rounded-full blur-sm"></div>
-        <div className="absolute top-20 right-20 w-40 h-20 bg-white/50 rounded-full blur-sm"></div>
-        <div className="absolute top-40 left-1/3 w-36 h-18 bg-white/40 rounded-full blur-sm"></div>
-      </div>
-
+    <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+      <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
           <Link to="/dashboard">
-            <Button variant="ghost" size="sm" className="font-bold">
+            <Button variant="ghost" size="sm" className="font-semibold">
               <ArrowLeft className="w-4 h-4 sm:mr-2" />
               <span className="hidden sm:inline">Retour</span>
             </Button>
@@ -54,9 +59,9 @@ const Portfolio = () => {
             <img src={logo} alt="Edufin360" className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-accent via-secondary to-accent border-2 border-primary shadow-lg">
-              <span className="text-lg sm:text-2xl">🪙</span>
-              <span className="font-bold text-sm sm:text-lg text-white">{totalCoins}</span>
+            <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-lg bg-primary/10 border border-primary/30">
+              <Coins className="w-4 h-4 text-primary" />
+              <span className="font-semibold text-sm sm:text-base text-foreground">{totalCoins}</span>
             </div>
           </div>
         </div>
@@ -64,100 +69,131 @@ const Portfolio = () => {
 
       {/* Header */}
       <section className="container mx-auto px-2 sm:px-4 py-6 sm:py-12 relative z-10">
-        <div className="inline-block bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 px-4 sm:px-8 py-2 sm:py-4 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-yellow-600 shadow-2xl mb-6 sm:mb-8 transform -rotate-1">
-          <h1 className="text-2xl sm:text-4xl font-black text-yellow-900 text-center" style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.2)' }}>
-            💼 MON PORTFOLIO 💼
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-2">
+            Mon Portfolio
           </h1>
+          <p className="text-muted-foreground">Suis tes investissements et ta progression</p>
         </div>
 
         {/* Stats Overview */}
         <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          <Card className="p-4 sm:p-6 border-3 sm:border-4 border-gray-800 bg-white shadow-2xl hover:scale-105 transition-all duration-300">
+          <Card className="p-4 sm:p-6 border-border bg-card hover:shadow-premium transition-all duration-300">
             <div className="text-center">
-              <div className="text-4xl sm:text-5xl mb-2 animate-float">💰</div>
-              <div className="text-2xl sm:text-4xl font-black text-gray-800">{availableCoins}</div>
-              <div className="text-xs sm:text-sm text-gray-600 font-black">Coins disponibles</div>
+              <div className="text-2xl sm:text-3xl mb-2 text-muted-foreground">Disponibles</div>
+              <div className="text-2xl sm:text-4xl font-bold text-foreground">{availableCoins}</div>
+              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Coins</div>
             </div>
           </Card>
 
-          <Card className="p-4 sm:p-6 border-3 sm:border-4 border-green-700 bg-gradient-to-br from-green-400 to-green-600 shadow-2xl hover:scale-105 transition-all duration-300">
+          <Card className="p-4 sm:p-6 border-primary/50 bg-gradient-to-br from-primary/10 to-secondary/10 hover:shadow-premium transition-all duration-300">
             <div className="text-center">
-              <div className="text-4xl sm:text-5xl mb-2 animate-float">📈</div>
-              <div className="text-2xl sm:text-4xl font-black text-white">{investedCoins}</div>
-              <div className="text-xs sm:text-sm text-white/90 font-black">Coins investis</div>
+              <div className="text-2xl sm:text-3xl mb-2 text-primary">Investis</div>
+              <div className="text-2xl sm:text-4xl font-bold text-foreground">{investedCoins}</div>
+              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Coins</div>
             </div>
           </Card>
 
-          <Card className="p-4 sm:p-6 border-3 sm:border-4 border-orange-700 bg-gradient-to-br from-orange-400 to-orange-600 shadow-2xl hover:scale-105 transition-all duration-300 animate-pulse-glow">
+          <Card className="p-4 sm:p-6 border-accent/50 bg-gradient-to-br from-accent/10 to-primary/10 hover:shadow-premium transition-all duration-300">
             <div className="text-center">
-              <div className="text-4xl sm:text-5xl mb-2 animate-float">🎯</div>
-              <div className="text-2xl sm:text-4xl font-black text-white">+8.5%</div>
-              <div className="text-xs sm:text-sm text-white/90 font-black">Performance totale</div>
+              <div className="text-2xl sm:text-3xl mb-2 text-accent">Performance</div>
+              <div className="text-2xl sm:text-4xl font-bold text-primary">+8.5%</div>
+              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Total</div>
             </div>
           </Card>
         </div>
+
+        {/* Performance Chart */}
+        <Card className="p-4 sm:p-6 mb-6 sm:mb-8 border-border bg-card">
+          <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-6">Évolution de tes Coins</h2>
+          <div className="h-64 sm:h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={performanceData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" />
+                <YAxis stroke="hsl(var(--muted-foreground))" />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'hsl(var(--card))', 
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '0.5rem',
+                    color: 'hsl(var(--foreground))'
+                  }}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="coins" 
+                  stroke="hsl(var(--primary))" 
+                  strokeWidth={3}
+                  dot={{ fill: 'hsl(var(--primary))', r: 5 }}
+                  activeDot={{ r: 7 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </Card>
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Investissements */}
           <div className="space-y-4 sm:space-y-6">
-            <Card className="p-4 sm:p-6 border-3 sm:border-4 border-gray-800 bg-white shadow-2xl">
+            <Card className="p-4 sm:p-6 border-border bg-card">
               <div className="flex items-center justify-between mb-4 sm:mb-6">
-                <h2 className="text-xl sm:text-2xl font-black text-gray-800">💼 Mes Investissements</h2>
-                <Button size="sm" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-black border-2 border-green-700 shadow-lg">
-                  + Investir
+                <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Mes Investissements</h2>
+                <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md">
+                  Investir
                 </Button>
               </div>
 
               <div className="space-y-3 sm:space-y-4">
                 {investments.map((inv, i) => (
-                  <div key={i} className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-100 to-purple-100 border-3 border-gray-700 hover:border-green-500 transition-all hover:scale-105 duration-300 shadow-lg">
+                  <div key={i} className="p-3 sm:p-4 rounded-lg bg-muted border border-border hover:border-primary/50 transition-all hover:shadow-md duration-300">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-black text-sm sm:text-base text-gray-800">{inv.name}</span>
+                      <span className="font-semibold text-sm sm:text-base text-foreground">{inv.name}</span>
                       <div className="flex items-center gap-1 sm:gap-2">
                         {inv.performance > 0 ? (
                           <TrendingUp className="w-4 h-4 text-primary" />
                         ) : (
                           <TrendingDown className="w-4 h-4 text-destructive" />
                         )}
-                        <span className={`font-bold text-sm sm:text-base ${inv.color}`}>
+                        <span className={`font-semibold text-sm sm:text-base ${inv.color}`}>
                           {inv.performance > 0 ? '+' : ''}{inv.performance}%
                         </span>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs sm:text-sm text-gray-700 font-bold">Investi: {inv.amount} 🪙</span>
-                      <span className="text-xs sm:text-sm font-black text-green-600">
-                        Valeur: {Math.round(inv.amount * (1 + inv.performance / 100))} 🪙
+                      <span className="text-xs sm:text-sm text-muted-foreground">Investi: {inv.amount} coins</span>
+                      <span className="text-xs sm:text-sm font-semibold text-primary">
+                        Valeur: {Math.round(inv.amount * (1 + inv.performance / 100))} coins
                       </span>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-4 sm:mt-6 p-3 sm:p-4 rounded-xl bg-gradient-to-r from-yellow-300 to-yellow-400 border-3 border-yellow-600 shadow-lg">
-                <p className="text-xs sm:text-sm text-yellow-900 font-black text-center">
-                  💡 Diversifie tes investissements pour réduire les risques !
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 rounded-lg bg-primary/10 border border-primary/30">
+                <p className="text-xs sm:text-sm text-foreground font-medium text-center">
+                  Diversifie tes investissements pour réduire les risques
                 </p>
               </div>
             </Card>
 
             {/* Performance History */}
-            <Card className="p-4 sm:p-6 border-3 sm:border-4 border-gray-800 bg-white shadow-2xl">
-              <h2 className="text-xl sm:text-2xl font-black text-gray-800 mb-4 sm:mb-6">📊 Performances Passées</h2>
+            <Card className="p-4 sm:p-6 border-border bg-card">
+              <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-6">Performances Passées</h2>
               
               <div className="space-y-3">
                 {[
-                  { period: "Aujourd'hui", gain: 15, percentage: 1.2, color: "from-blue-400 to-blue-600" },
-                  { period: "Cette semaine", gain: 85, percentage: 7.1, color: "from-green-400 to-green-600" },
-                  { period: "Ce mois", gain: 105, percentage: 8.5, color: "from-purple-400 to-purple-600" },
-                  { period: "Total", gain: 150, percentage: 12.0, color: "from-yellow-400 to-yellow-600" }
+                  { period: "Aujourd'hui", gain: 15, percentage: 1.2, color: "from-primary/20 to-primary/10" },
+                  { period: "Cette semaine", gain: 85, percentage: 7.1, color: "from-secondary/20 to-secondary/10" },
+                  { period: "Ce mois", gain: 105, percentage: 8.5, color: "from-accent/20 to-accent/10" },
+                  { period: "Total", gain: 150, percentage: 12.0, color: "from-primary/30 to-secondary/20" }
                 ].map((perf, i) => (
-                  <div key={i} className={`flex items-center justify-between p-3 rounded-xl bg-gradient-to-r ${perf.color} border-2 border-gray-800 shadow-lg hover:scale-105 transition-all duration-300`}>
-                    <span className="font-black text-sm sm:text-base text-white">{perf.period}</span>
+                  <div key={i} className={`flex items-center justify-between p-3 rounded-lg bg-gradient-to-r ${perf.color} border border-border hover:shadow-md transition-all duration-300`}>
+                    <span className="font-semibold text-sm sm:text-base text-foreground">{perf.period}</span>
                     <div className="text-right">
-                      <div className="font-black text-white text-sm sm:text-base drop-shadow-lg">+{perf.gain} 🪙</div>
-                      <div className="text-xs text-white/90 font-bold">+{perf.percentage}%</div>
+                      <div className="font-semibold text-foreground text-sm sm:text-base">+{perf.gain} coins</div>
+                      <div className="text-xs text-muted-foreground">+{perf.percentage}%</div>
                     </div>
                   </div>
                 ))}
@@ -168,38 +204,38 @@ const Portfolio = () => {
           {/* Rankings */}
           <div className="space-y-4 sm:space-y-6">
             {/* Global Ranking */}
-            <Card className="p-4 sm:p-6 border-3 sm:border-4 border-gray-800 bg-white shadow-2xl">
+            <Card className="p-4 sm:p-6 border-border bg-card">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <div className="text-2xl sm:text-3xl">🏆</div>
-                <h2 className="text-xl sm:text-2xl font-black text-gray-800">Classement Général</h2>
+                <TrendingUp className="w-6 h-6 text-primary" />
+                <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Classement Général</h2>
               </div>
 
               <div className="space-y-2 sm:space-y-3">
                 {globalRanking.map((player) => (
                   <div 
                     key={player.rank}
-                    className={`flex items-center justify-between p-3 sm:p-4 rounded-xl border-3 transition-all duration-300 hover:scale-105 ${
+                    className={`flex items-center justify-between p-3 sm:p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
                       player.isUser 
-                        ? 'bg-gradient-to-r from-yellow-300 to-yellow-400 border-yellow-700 shadow-2xl animate-pulse-glow' 
-                        : 'bg-gradient-to-r from-gray-100 to-gray-200 border-gray-700 hover:border-green-500 shadow-lg'
+                        ? 'bg-primary/10 border-primary/50 shadow-premium' 
+                        : 'bg-muted border-border hover:border-primary/30'
                     }`}
                   >
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-black text-lg sm:text-xl border-2 border-gray-800 ${
-                        player.rank <= 3 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' : 'bg-white'
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center font-semibold text-base sm:text-lg ${
+                        player.rank <= 3 ? 'bg-gradient-to-br from-primary to-secondary text-white' : 'bg-background text-foreground'
                       }`}>
-                        {player.rank <= 3 ? ['🥇', '🥈', '🥉'][player.rank - 1] : `#${player.rank}`}
+                        #{player.rank}
                       </div>
-                      <span className={`font-black text-sm sm:text-base ${player.isUser ? 'text-yellow-900' : 'text-gray-800'}`}>
+                      <span className={`font-semibold text-sm sm:text-base ${player.isUser ? 'text-primary' : 'text-foreground'}`}>
                         {player.name}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="font-black text-sm sm:text-base text-gray-800">{player.coins} 🪙</span>
+                      <span className="font-semibold text-sm sm:text-base text-foreground">{player.coins}</span>
                       {player.trend === "up" ? (
-                        <TrendingUp className="w-4 h-4 text-green-600" />
+                        <TrendingUp className="w-4 h-4 text-primary" />
                       ) : (
-                        <TrendingDown className="w-4 h-4 text-red-600" />
+                        <TrendingDown className="w-4 h-4 text-destructive" />
                       )}
                     </div>
                   </div>
@@ -208,39 +244,41 @@ const Portfolio = () => {
             </Card>
 
             {/* Friends Ranking */}
-            <Card className="p-4 sm:p-6 border-3 sm:border-4 border-purple-700 bg-gradient-to-br from-purple-400 to-pink-400 shadow-2xl">
+            <Card className="p-4 sm:p-6 border-primary/50 bg-gradient-to-br from-primary/10 to-secondary/10">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <div className="text-2xl sm:text-3xl">👥</div>
-                <h2 className="text-xl sm:text-2xl font-black text-white drop-shadow-lg">Classement Amis</h2>
+                <Users className="w-6 h-6 text-primary" />
+                <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Classement Amis</h2>
               </div>
 
               <div className="space-y-2 sm:space-y-3">
                 {friendsRanking.map((friend) => (
                   <div 
                     key={friend.rank}
-                    className={`flex items-center justify-between p-3 sm:p-4 rounded-xl border-3 transition-all duration-300 hover:scale-105 ${
+                    className={`flex items-center justify-between p-3 sm:p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
                       friend.isUser 
-                        ? 'bg-white border-yellow-600 shadow-2xl animate-pulse-glow' 
-                        : 'bg-white/90 border-gray-700 hover:border-purple-500 shadow-lg'
+                        ? 'bg-card border-primary shadow-md' 
+                        : 'bg-card/50 border-border hover:border-primary/30'
                     }`}
                   >
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <div className="text-3xl sm:text-4xl">{friend.avatar}</div>
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold">
+                        {friend.name.charAt(0)}
+                      </div>
                       <div>
-                        <div className={`font-black text-sm sm:text-base ${friend.isUser ? 'text-yellow-900' : 'text-gray-800'}`}>
+                        <div className={`font-semibold text-sm sm:text-base ${friend.isUser ? 'text-primary' : 'text-foreground'}`}>
                           {friend.name}
                         </div>
-                        <div className="text-xs text-gray-600 font-bold">#{friend.rank}</div>
+                        <div className="text-xs text-muted-foreground">#{friend.rank}</div>
                       </div>
                     </div>
-                    <span className="font-black text-sm sm:text-base text-gray-800">{friend.coins} 🪙</span>
+                    <span className="font-semibold text-sm sm:text-base text-foreground">{friend.coins}</span>
                   </div>
                 ))}
               </div>
 
-              <Button className="w-full mt-4 sm:mt-6 bg-white hover:bg-white/90 text-gray-800 font-black border-3 border-gray-800 shadow-xl hover:scale-105 transition-all duration-300">
+              <Button className="w-full mt-4 sm:mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md hover:shadow-lg transition-all duration-300">
                 <Users className="w-4 h-4 mr-2" />
-                👥 Inviter des amis
+                Inviter des amis
               </Button>
             </Card>
           </div>
