@@ -18,13 +18,7 @@ const Index = () => {
 
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <img src={logo} alt="Edufin360" className="w-8 h-8 sm:w-10 sm:h-10" />
-            <h1 className="text-lg sm:text-2xl font-black text-gray-800">
-              Edufin360
-            </h1>
-          </div>
+        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-end">
           <div className="flex gap-2 sm:gap-3">
             <Link to="/map" className="hidden sm:block">
               <Button variant="outline" className="font-bold border-2">Connexion</Button>
