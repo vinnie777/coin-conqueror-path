@@ -413,44 +413,44 @@ const Quiz = () => {
       </div>
 
       {/* Quiz Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-12">
         <div className="max-w-4xl mx-auto">
           <Card className="overflow-hidden border-2 border-primary/20 shadow-2xl animate-scale-in">
             {/* Question Image Header */}
-            <div className="relative h-64 md:h-80 overflow-hidden">
+            <div className="relative h-48 sm:h-64 md:h-80 overflow-hidden">
               <img 
                 src={question.image}
                 alt="Question illustration"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-transparent"></div>
               
               {/* Floating Question Number */}
-              <div className="absolute top-6 left-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-xl">
-                <span className="text-3xl font-bold text-white">{currentQuestion + 1}</span>
+              <div className="absolute top-3 left-3 sm:top-6 sm:left-6 w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-xl">
+                <span className="text-xl sm:text-3xl font-bold text-white">{currentQuestion + 1}</span>
               </div>
 
               {/* Score indicator */}
-              <div className="absolute top-6 right-6 px-4 py-2 rounded-full bg-card/90 backdrop-blur-sm border-2 border-accent/30 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-accent" />
-                  <span className="font-bold text-accent">{score * 30} coins</span>
+              <div className="absolute top-3 right-3 sm:top-6 sm:right-6 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-card/90 backdrop-blur-sm border-2 border-accent/30 shadow-lg">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-accent" />
+                  <span className="font-bold text-accent text-sm sm:text-base">{score * 30} coins</span>
                 </div>
               </div>
 
               {/* Question text overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
+                <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] leading-tight">
                   {question.question}
                 </h2>
               </div>
             </div>
 
-            <div className="p-8">
+            <div className="p-4 sm:p-6 md:p-8">
               {/* Instructions de swipe */}
               {!showExplanation && (
-                <div className="mb-6 p-4 rounded-lg bg-muted/50 border border-border">
-                  <p className="text-center text-sm text-muted-foreground">
+                <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg bg-muted/50 border border-border">
+                  <p className="text-center text-xs sm:text-sm text-muted-foreground">
                     👈 Swipe à gauche pour <span className="font-bold text-destructive">Faux</span> • 
                     Swipe à droite pour <span className="font-bold text-secondary">Vrai</span> 👉
                   </p>
@@ -474,21 +474,21 @@ const Quiz = () => {
                     transform: `translateX(${swipeOffset}px) rotate(${swipeOffset * 0.05}deg)`,
                   }}
                 >
-                  <Card className={`p-8 text-center border-2 ${
+                  <Card className={`p-6 sm:p-8 text-center border-2 ${
                     selectedAnswer === true && showExplanation
                       ? 'border-secondary bg-secondary/10'
                       : selectedAnswer === false && showExplanation
                       ? 'border-destructive bg-destructive/10'
                       : 'border-primary/50'
                   }`}>
-                    <div className="text-6xl mb-6">
+                    <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">
                       {selectedAnswer === true && showExplanation ? (
                         question.correctAnswer ? '✓' : '✗'
                       ) : selectedAnswer === false && showExplanation ? (
                         !question.correctAnswer ? '✓' : '✗'
                       ) : '❓'}
                     </div>
-                    <p className="text-xl font-medium">
+                    <p className="text-lg sm:text-xl font-medium">
                       {showExplanation 
                         ? (selectedAnswer === question.correctAnswer ? 'Bonne réponse !' : 'Mauvaise réponse')
                         : 'Vrai ou Faux ?'
@@ -499,15 +499,15 @@ const Quiz = () => {
 
                 {/* Indicateurs de direction pendant le swipe */}
                 {swipeOffset < -50 && !showExplanation && (
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full px-4">
-                    <div className="bg-destructive text-white px-6 py-3 rounded-lg font-bold animate-pulse">
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full px-2 sm:px-4">
+                    <div className="bg-destructive text-white px-3 py-2 sm:px-6 sm:py-3 rounded-lg font-bold animate-pulse text-sm sm:text-base">
                       FAUX
                     </div>
                   </div>
                 )}
                 {swipeOffset > 50 && !showExplanation && (
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full px-4">
-                    <div className="bg-secondary text-white px-6 py-3 rounded-lg font-bold animate-pulse">
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full px-2 sm:px-4">
+                    <div className="bg-secondary text-white px-3 py-2 sm:px-6 sm:py-3 rounded-lg font-bold animate-pulse text-sm sm:text-base">
                       VRAI
                     </div>
                   </div>
@@ -516,23 +516,23 @@ const Quiz = () => {
 
               {/* Boutons alternatifs */}
               {!showExplanation && (
-                <div className="grid grid-cols-2 gap-4 mt-6">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
                   <Button
                     size="lg"
                     variant="outline"
                     onClick={() => handleAnswer(false)}
-                    className="border-2 border-destructive/50 hover:bg-destructive/10 hover:border-destructive text-lg py-6"
+                    className="border-2 border-destructive/50 hover:bg-destructive/10 hover:border-destructive text-base sm:text-lg py-4 sm:py-6"
                   >
-                    <XCircle className="w-5 h-5 mr-2" />
+                    <XCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Faux
                   </Button>
                   <Button
                     size="lg"
                     variant="outline"
                     onClick={() => handleAnswer(true)}
-                    className="border-2 border-secondary/50 hover:bg-secondary/10 hover:border-secondary text-lg py-6"
+                    className="border-2 border-secondary/50 hover:bg-secondary/10 hover:border-secondary text-base sm:text-lg py-4 sm:py-6"
                   >
-                    <CheckCircle className="w-5 h-5 mr-2" />
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Vrai
                   </Button>
                 </div>
@@ -540,14 +540,14 @@ const Quiz = () => {
 
               {/* Explication */}
               {showExplanation && (
-                <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 border-2 border-primary/20 animate-fade-in">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
-                      <span className="text-3xl">💡</span>
+                <div className="mt-4 sm:mt-6 p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 border-2 border-primary/20 animate-fade-in">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <span className="text-2xl sm:text-3xl">💡</span>
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-xl mb-3">Explication</h3>
-                      <p className="text-muted-foreground leading-relaxed text-lg">{question.explanation}</p>
+                      <h3 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3">Explication</h3>
+                      <p className="text-muted-foreground leading-relaxed text-sm sm:text-base md:text-lg">{question.explanation}</p>
                     </div>
                   </div>
                 </div>
