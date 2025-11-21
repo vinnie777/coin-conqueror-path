@@ -9,8 +9,10 @@ import zone2 from "@/assets/zone2-desert.png";
 import zone3 from "@/assets/zone3-forest.png";
 
 const Index = () => {
-  // Date de début du challenge (à ajuster selon vos besoins)
-  const challengeStartDate = new Date("2025-01-01T00:00:00");
+  // Date de fin du challenge (5 jours et 3 heures à partir de maintenant)
+  const challengeEndDate = new Date();
+  challengeEndDate.setDate(challengeEndDate.getDate() + 5);
+  challengeEndDate.setHours(challengeEndDate.getHours() + 3);
   
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -19,25 +21,10 @@ const Index = () => {
     seconds: 0
   });
 
-  const [initialCountdown, setInitialCountdown] = useState(3);
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    // Animation de décompte initial
-    if (initialCountdown > 0) {
-      const timer = setTimeout(() => {
-        setInitialCountdown(initialCountdown - 1);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else {
-      setShowContent(true);
-    }
-  }, [initialCountdown]);
-
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = new Date();
-      const difference = challengeStartDate.getTime() - now.getTime();
+      const difference = challengeEndDate.getTime() - now.getTime();
 
       if (difference > 0) {
         setTimeLeft({
@@ -78,62 +65,53 @@ const Index = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-2 sm:px-4 py-8 sm:py-16 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
+          {/* Title Flow */}
+          <div className="mb-4">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
+              Flow
+            </h1>
+          </div>
+
           {/* Prize Banner */}
-          {!showContent && initialCountdown > 0 ? (
-            <div className="min-h-[200px] flex items-center justify-center">
-              <div className="text-8xl sm:text-9xl font-bold text-primary animate-pulse">
-                {initialCountdown}
+          <div className="mb-6 sm:mb-8 p-6 sm:p-8 rounded-xl bg-card border-2 border-primary shadow-lg">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
+              <h3 className="text-3xl sm:text-5xl font-bold text-foreground">
+                50.000€
+              </h3>
+            </div>
+            <p className="text-sm sm:text-lg text-muted-foreground">
+              à gagner dans le challenge
+            </p>
+          </div>
+
+          {/* Countdown Timer */}
+          <div className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-xl bg-card border-2 border-border shadow-lg">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+              <h4 className="text-base sm:text-xl font-bold text-foreground">
+                Le challenge se termine dans :
+              </h4>
+            </div>
+            <div className="grid grid-cols-4 gap-2 sm:gap-4 max-w-2xl mx-auto">
+              <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
+                <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.days}</div>
+                <div className="text-xs sm:text-sm text-white/80 font-medium">Jours</div>
+              </div>
+              <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
+                <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.hours}</div>
+                <div className="text-xs sm:text-sm text-white/80 font-medium">Heures</div>
+              </div>
+              <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
+                <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.minutes}</div>
+                <div className="text-xs sm:text-sm text-white/80 font-medium">Minutes</div>
+              </div>
+              <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
+                <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.seconds}</div>
+                <div className="text-xs sm:text-sm text-white/80 font-medium">Secondes</div>
               </div>
             </div>
-          ) : (
-            <>
-              <div className="mb-6 sm:mb-8 p-6 sm:p-8 rounded-xl bg-card border-2 border-primary shadow-lg">
-                <div className="flex items-center justify-center gap-3 mb-2">
-                  <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
-                  <h3 className="text-3xl sm:text-5xl font-bold text-foreground">
-                    50.000€
-                  </h3>
-                </div>
-                <p className="text-sm sm:text-lg text-muted-foreground">
-                  à gagner dans le challenge
-                </p>
-              </div>
-
-              {/* Countdown Timer */}
-              <div className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-xl bg-card border-2 border-border shadow-lg">
-                <div className="flex items-center justify-center gap-2 mb-3">
-                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                  <h4 className="text-base sm:text-xl font-bold text-foreground">
-                    Le challenge commence dans :
-                  </h4>
-                </div>
-                <div className="grid grid-cols-4 gap-2 sm:gap-4 max-w-2xl mx-auto">
-                  <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
-                    <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.days}</div>
-                    <div className="text-xs sm:text-sm text-white/80 font-medium">Jours</div>
-                  </div>
-                  <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
-                    <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.hours}</div>
-                    <div className="text-xs sm:text-sm text-white/80 font-medium">Heures</div>
-                  </div>
-                  <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
-                    <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.minutes}</div>
-                    <div className="text-xs sm:text-sm text-white/80 font-medium">Minutes</div>
-                  </div>
-                  <div className="bg-gradient-to-br from-primary to-secondary p-3 sm:p-4 rounded-lg">
-                    <div className="text-2xl sm:text-4xl font-bold text-white">{timeLeft.seconds}</div>
-                    <div className="text-xs sm:text-sm text-white/80 font-medium">Secondes</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
-                  Flow
-                </h1>
-              </div>
-            </>
-          )}
+          </div>
           
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center pt-4 sm:pt-6 px-4">
             <Link to="/map" className="w-full sm:w-auto">
