@@ -101,6 +101,64 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Features Section with Images */}
+      <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-16 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="inline-block bg-gradient-to-r from-secondary via-primary to-secondary px-4 sm:px-8 py-2 sm:py-4 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-primary shadow-2xl mb-8 sm:mb-12 mx-auto">
+            <h3 className="text-2xl sm:text-4xl font-black text-white text-center" style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.2)' }}>
+              COMMENT ÇA MARCHE ?
+            </h3>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+            {[
+              {
+                step: "01",
+                title: "Explore la Carte",
+                description: "Débute ton voyage dans la Baie des Fondamentaux et progresse à travers 7 zones thématiques.",
+                gradient: "from-primary to-blue-600",
+                image: zone1
+              },
+              {
+                step: "02",
+                title: "Complète les Défis",
+                description: "Réponds à des quiz, regarde des vidéos et relève des défis quotidiens pour avancer.",
+                gradient: "from-secondary to-green-600",
+                image: zone2
+              },
+              {
+                step: "03",
+                title: "Gagne des Récompenses",
+                description: "Accumule des InvestCoins, débloque des badges et grimpe dans le classement.",
+                gradient: "from-accent to-orange-600",
+                image: zone3
+              }
+            ].map((feature, i) => (
+              <div 
+                key={i}
+                className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-white border-2 sm:border-4 border-border shadow-2xl transition-all duration-300 hover:scale-105 animate-scale-in group"
+                style={{ animationDelay: `${i * 0.15}s` }}
+              >
+                <div className="relative h-32 sm:h-48 overflow-hidden">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  <div className={`absolute top-2 left-2 sm:top-4 sm:left-4 w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white font-black text-xl sm:text-2xl shadow-2xl border-2 sm:border-4 border-white`}>
+                    {feature.step}
+                  </div>
+                </div>
+                <div className="p-4 sm:p-6 bg-white">
+                  <h4 className="text-lg sm:text-2xl font-black text-foreground mb-2 sm:mb-3">{feature.title}</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground font-semibold leading-relaxed">{feature.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-16 relative z-10">
