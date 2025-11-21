@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, TrendingUp, Trophy, Coins, Flame, MapPin, Star } from "lucide-react";
+import logo from "@/assets/logo.png";
+import zone2Img from "@/assets/zone2-desert.png";
 
 const Dashboard = () => {
   return (
@@ -15,6 +17,9 @@ const Dashboard = () => {
               Retour
             </Button>
           </Link>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="Edufin360" className="w-10 h-10" />
+          </div>
           <Link to="/map">
             <Button className="bg-gradient-to-r from-primary to-secondary">
               Voir la carte
@@ -84,41 +89,51 @@ const Dashboard = () => {
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-6">
             {/* Activity of the day */}
-            <Card className="p-6 border-2 border-primary/20">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold">Activité du jour</h2>
-                <span className="px-3 py-1 rounded-full bg-secondary/10 text-secondary text-sm font-medium border border-secondary/20">
-                  Disponible
-                </span>
-              </div>
-              
-              <div className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 mb-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-3xl flex-shrink-0">
-                    🎯
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Quiz du jour : Le Désert de la Volatilité</h3>
-                    <p className="text-muted-foreground mb-4">Réponds à 5 questions sur les fluctuations du marché et gagne 150 InvestCoins.</p>
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-2 text-sm">
-                        <span>⏱️</span>
-                        <span className="text-muted-foreground">5 min</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm">
-                        <span>🪙</span>
-                        <span className="font-medium text-accent">+150 coins</span>
-                      </div>
-                    </div>
-                  </div>
+            <Card className="p-0 border-2 border-primary/20 overflow-hidden">
+              <div className="relative h-48">
+                <img 
+                  src={zone2Img} 
+                  alt="Zone du jour"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent"></div>
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-sm font-medium border border-secondary shadow-lg">
+                  Disponible maintenant
                 </div>
               </div>
+              
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold">Activité du jour</h2>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl">
+                    🎯
+                  </div>
+                </div>
+                
+                <h3 className="text-xl font-bold mb-2">Quiz : Le Désert de la Volatilité</h3>
+                <p className="text-muted-foreground mb-4">Réponds à 5 questions sur les fluctuations du marché et comprends la psychologie des investisseurs.</p>
+                
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  <div className="p-3 rounded-lg bg-muted/50 text-center">
+                    <div className="text-2xl mb-1">⏱️</div>
+                    <div className="text-xs text-muted-foreground">5 minutes</div>
+                  </div>
+                  <div className="p-3 rounded-lg bg-accent/10 border border-accent/20 text-center">
+                    <div className="text-2xl mb-1">🪙</div>
+                    <div className="text-xs font-bold text-accent">+150 coins</div>
+                  </div>
+                  <div className="p-3 rounded-lg bg-primary/10 border border-primary/20 text-center">
+                    <div className="text-2xl mb-1">⭐</div>
+                    <div className="text-xs font-bold text-primary">+100 XP</div>
+                  </div>
+                </div>
 
-              <Link to="/quiz/2">
-                <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary">
-                  Commencer l'activité
-                </Button>
-              </Link>
+                <Link to="/quiz/2">
+                  <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary">
+                    Commencer l'activité
+                  </Button>
+                </Link>
+              </div>
             </Card>
 
             {/* Progress */}
