@@ -76,7 +76,7 @@ const Index = () => {
               À GAGNER DANS LE CHALLENGE !
             </p>
             <p className="text-xs sm:text-sm text-white/80">
-              Financé par Anna Mronz
+              Financé gracieusement par Anna Mronz
             </p>
           </div>
 
