@@ -103,14 +103,8 @@ const Index = () => {
 
       {/* Features Section with Images */}
       <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-16 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="inline-block bg-gradient-to-r from-secondary via-primary to-secondary px-4 sm:px-8 py-2 sm:py-4 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-primary shadow-2xl mb-8 sm:mb-12 mx-auto">
-            <h3 className="text-2xl sm:text-4xl font-black text-white text-center" style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.2)' }}>
-              COMMENT ÇA MARCHE ?
-            </h3>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
             {[
               {
                 step: "01",
