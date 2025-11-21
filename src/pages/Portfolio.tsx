@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { ArrowLeft, TrendingUp, TrendingDown, Users, Trophy } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const Portfolio = () => {
   const [investedCoins, setInvestedCoins] = useState(500);
@@ -31,15 +30,6 @@ const Portfolio = () => {
     { rank: 2, name: "Toi", coins: 1250, avatar: "😊", isUser: true },
     { rank: 3, name: "Julie K.", coins: 980, avatar: "👩" },
     { rank: 4, name: "Marc P.", coins: 750, avatar: "👨" }
-  ];
-
-  const performanceData = [
-    { time: "Sem 1", coins: 800 },
-    { time: "Sem 2", coins: 950 },
-    { time: "Sem 3", coins: 920 },
-    { time: "Sem 4", coins: 1050 },
-    { time: "Sem 5", coins: 1150 },
-    { time: "Sem 6", coins: 1250 }
   ];
 
   return (
@@ -152,48 +142,25 @@ const Portfolio = () => {
               </div>
             </Card>
 
-            {/* Performance Chart */}
+            {/* Performance History */}
             <Card className="p-4 sm:p-6 border-3 sm:border-4 border-gray-800 bg-white shadow-2xl">
-              <h2 className="text-xl sm:text-2xl font-black text-gray-800 mb-4 sm:mb-6">📈 Évolution des Coins</h2>
+              <h2 className="text-xl sm:text-2xl font-black text-gray-800 mb-4 sm:mb-6">📊 Performances Passées</h2>
               
-              <div className="h-64 w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={performanceData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                    <XAxis 
-                      dataKey="time" 
-                      stroke="#374151"
-                      style={{ fontSize: '12px', fontWeight: 'bold' }}
-                    />
-                    <YAxis 
-                      stroke="#374151"
-                      style={{ fontSize: '12px', fontWeight: 'bold' }}
-                    />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: '#fff',
-                        border: '3px solid #374151',
-                        borderRadius: '12px',
-                        fontWeight: 'bold'
-                      }}
-                      formatter={(value) => [`${value} 🪙`, 'Coins']}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="coins" 
-                      stroke="#10b981" 
-                      strokeWidth={3}
-                      dot={{ fill: '#10b981', strokeWidth: 2, r: 5 }}
-                      activeDot={{ r: 8 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="mt-4 p-3 rounded-xl bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-gray-800">
-                <p className="text-xs sm:text-sm text-gray-800 font-black text-center">
-                  📈 +450 coins gagnés ces 6 dernières semaines !
-                </p>
+              <div className="space-y-3">
+                {[
+                  { period: "Aujourd'hui", gain: 15, percentage: 1.2, color: "from-blue-400 to-blue-600" },
+                  { period: "Cette semaine", gain: 85, percentage: 7.1, color: "from-green-400 to-green-600" },
+                  { period: "Ce mois", gain: 105, percentage: 8.5, color: "from-purple-400 to-purple-600" },
+                  { period: "Total", gain: 150, percentage: 12.0, color: "from-yellow-400 to-yellow-600" }
+                ].map((perf, i) => (
+                  <div key={i} className={`flex items-center justify-between p-3 rounded-xl bg-gradient-to-r ${perf.color} border-2 border-gray-800 shadow-lg hover:scale-105 transition-all duration-300`}>
+                    <span className="font-black text-sm sm:text-base text-white">{perf.period}</span>
+                    <div className="text-right">
+                      <div className="font-black text-white text-sm sm:text-base drop-shadow-lg">+{perf.gain} 🪙</div>
+                      <div className="text-xs text-white/90 font-bold">+{perf.percentage}%</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </Card>
           </div>
