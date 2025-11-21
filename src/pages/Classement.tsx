@@ -56,44 +56,41 @@ const Classement = () => {
       </nav>
 
       {/* Header */}
-      <section className="container mx-auto px-4 py-12">
-        <div className="flex items-center justify-between mb-8">
+      <section className="container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold mb-2">Classement</h1>
-            <p className="text-muted-foreground">Les meilleurs investisseurs de la plateforme</p>
+            <h1 className="text-2xl sm:text-4xl font-bold mb-1">Classement</h1>
+            <p className="text-sm text-muted-foreground">Les meilleurs investisseurs</p>
           </div>
         </div>
 
         {/* Top 3 Podium */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-6">
           {/* 1st Place */}
-          <Card className="p-6 border-2 border-accent/50 hover:border-accent transition-all">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-yellow-600 flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-white" />
+          <Card className="p-3 sm:p-6 border-2 border-accent/50 hover:border-accent transition-all">
+            <div className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-accent to-yellow-600 flex items-center justify-center">
+                <Trophy className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl font-bold text-accent">#1</span>
-                  <Medal className="w-5 h-5 text-accent" />
-                </div>
-                <div className="text-xs text-muted-foreground">Premier</div>
+              <div className="text-center">
+                <div className="text-sm sm:text-2xl font-bold text-accent">#1</div>
+                <div className="text-xs text-muted-foreground hidden sm:block">Premier</div>
               </div>
             </div>
-            <div className="mb-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl font-bold text-white mb-3">
+            <div className="text-center mt-2 sm:mt-4">
+              <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xs sm:text-xl font-bold text-white mb-2 sm:mb-3 mx-auto">
                 {topPlayers[0].initials}
               </div>
-              <h3 className="font-bold text-xl mb-1">{topPlayers[0].name}</h3>
-              <div className="text-3xl font-bold text-accent mb-2">{topPlayers[0].score}</div>
-              <div className="text-sm text-muted-foreground">points</div>
+              <h3 className="font-bold text-xs sm:text-xl mb-1 truncate">{topPlayers[0].name}</h3>
+              <div className="text-lg sm:text-3xl font-bold text-accent mb-1">{topPlayers[0].score}</div>
+              <div className="text-xs text-muted-foreground">pts</div>
             </div>
-            <div className="space-y-2 pt-4 border-t">
-              <div className="flex items-center justify-between text-sm">
+            <div className="space-y-1 pt-2 sm:pt-4 border-t mt-2 sm:mt-4">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">XP</span>
                 <span className="font-medium">{topPlayers[0].xp}</span>
               </div>
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Zones</span>
                 <span className="font-medium">{topPlayers[0].zones}/7</span>
               </div>
@@ -101,32 +98,30 @@ const Classement = () => {
           </Card>
 
           {/* 2nd Place */}
-          <Card className="p-6 border-2 border-border hover:border-primary/50 transition-all">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
-                <Award className="w-6 h-6 text-white" />
+          <Card className="p-3 sm:p-6 border-2 border-border hover:border-primary/50 transition-all">
+            <div className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
+                <Award className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl font-bold">#2</span>
-                </div>
-                <div className="text-xs text-muted-foreground">Deuxième</div>
+              <div className="text-center">
+                <div className="text-sm sm:text-2xl font-bold">#2</div>
+                <div className="text-xs text-muted-foreground hidden sm:block">Deuxième</div>
               </div>
             </div>
-            <div className="mb-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl font-bold text-white mb-3">
+            <div className="text-center mt-2 sm:mt-4">
+              <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xs sm:text-xl font-bold text-white mb-2 sm:mb-3 mx-auto">
                 {topPlayers[1].initials}
               </div>
-              <h3 className="font-bold text-xl mb-1">{topPlayers[1].name}</h3>
-              <div className="text-3xl font-bold mb-2">{topPlayers[1].score}</div>
-              <div className="text-sm text-muted-foreground">points</div>
+              <h3 className="font-bold text-xs sm:text-xl mb-1 truncate">{topPlayers[1].name}</h3>
+              <div className="text-lg sm:text-3xl font-bold mb-1">{topPlayers[1].score}</div>
+              <div className="text-xs text-muted-foreground">pts</div>
             </div>
-            <div className="space-y-2 pt-4 border-t">
-              <div className="flex items-center justify-between text-sm">
+            <div className="space-y-1 pt-2 sm:pt-4 border-t mt-2 sm:mt-4">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">XP</span>
                 <span className="font-medium">{topPlayers[1].xp}</span>
               </div>
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Zones</span>
                 <span className="font-medium">{topPlayers[1].zones}/7</span>
               </div>
@@ -134,32 +129,30 @@ const Classement = () => {
           </Card>
 
           {/* 3rd Place */}
-          <Card className="p-6 border-2 border-border hover:border-primary/50 transition-all">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center">
-                <Star className="w-6 h-6 text-white" />
+          <Card className="p-3 sm:p-6 border-2 border-border hover:border-primary/50 transition-all">
+            <div className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center">
+                <Star className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl font-bold">#3</span>
-                </div>
-                <div className="text-xs text-muted-foreground">Troisième</div>
+              <div className="text-center">
+                <div className="text-sm sm:text-2xl font-bold">#3</div>
+                <div className="text-xs text-muted-foreground hidden sm:block">Troisième</div>
               </div>
             </div>
-            <div className="mb-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl font-bold text-white mb-3">
+            <div className="text-center mt-2 sm:mt-4">
+              <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xs sm:text-xl font-bold text-white mb-2 sm:mb-3 mx-auto">
                 {topPlayers[2].initials}
               </div>
-              <h3 className="font-bold text-xl mb-1">{topPlayers[2].name}</h3>
-              <div className="text-3xl font-bold mb-2">{topPlayers[2].score}</div>
-              <div className="text-sm text-muted-foreground">points</div>
+              <h3 className="font-bold text-xs sm:text-xl mb-1 truncate">{topPlayers[2].name}</h3>
+              <div className="text-lg sm:text-3xl font-bold mb-1">{topPlayers[2].score}</div>
+              <div className="text-xs text-muted-foreground">pts</div>
             </div>
-            <div className="space-y-2 pt-4 border-t">
-              <div className="flex items-center justify-between text-sm">
+            <div className="space-y-1 pt-2 sm:pt-4 border-t mt-2 sm:mt-4">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">XP</span>
                 <span className="font-medium">{topPlayers[2].xp}</span>
               </div>
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Zones</span>
                 <span className="font-medium">{topPlayers[2].zones}/7</span>
               </div>
@@ -169,56 +162,58 @@ const Classement = () => {
 
         {/* Tabs for Rankings */}
         <Tabs defaultValue="general" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="general" className="gap-2">
-              <Medal className="w-4 h-4" />
-              Classement Général
+          <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsTrigger value="general" className="gap-2 text-xs sm:text-sm">
+              <Medal className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Classement Général</span>
+              <span className="sm:hidden">Général</span>
             </TabsTrigger>
-            <TabsTrigger value="teams" className="gap-2">
-              <Users className="w-4 h-4" />
-              Classement par Équipe
+            <TabsTrigger value="teams" className="gap-2 text-xs sm:text-sm">
+              <Users className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Classement par Équipe</span>
+              <span className="sm:hidden">Équipes</span>
             </TabsTrigger>
           </TabsList>
 
           {/* General Ranking */}
-          <TabsContent value="general" className="space-y-3">
+          <TabsContent value="general" className="space-y-2">
             {generalRanking.map((player) => {
               const getTrendIcon = (trend: string) => {
-                if (trend === "up") return <TrendingUp className="w-4 h-4 text-secondary" />;
-                if (trend === "down") return <TrendingUp className="w-4 h-4 text-destructive rotate-180" />;
-                return <span className="text-muted-foreground text-sm">—</span>;
+                if (trend === "up") return <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />;
+                if (trend === "down") return <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-destructive rotate-180" />;
+                return <span className="text-muted-foreground text-xs">—</span>;
               };
 
               return (
                 <Card 
                   key={player.rank} 
-                  className="p-4 hover:border-primary/50 transition-all"
+                  className="p-2 sm:p-4 hover:border-primary/50 transition-all"
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center font-bold text-foreground">
+                  <div className="flex items-center justify-between gap-2 sm:gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                      <div className="w-6 h-6 sm:w-10 sm:h-10 rounded-lg bg-muted flex items-center justify-center font-bold text-foreground text-xs sm:text-base flex-shrink-0">
                         {player.rank}
                       </div>
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white">
+                      <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white text-xs sm:text-base flex-shrink-0">
                         {player.initials}
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-lg mb-1">{player.name}</h3>
-                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-sm sm:text-lg truncate">{player.name}</h3>
+                        <div className="flex items-center gap-2 sm:gap-3 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
-                            <Star className="w-3 h-3" />
-                            {player.xp} XP
+                            <Star className="w-2 h-2 sm:w-3 sm:h-3" />
+                            {player.xp}
                           </span>
-                          <span>{player.zones}/7 zones</span>
+                          <span className="hidden sm:inline">{player.zones}/7</span>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-primary">{player.score}</div>
-                        <div className="text-xs text-muted-foreground">points</div>
+                        <div className="text-base sm:text-2xl font-bold text-primary">{player.score}</div>
+                        <div className="text-xs text-muted-foreground">pts</div>
                       </div>
-                      <div className="w-8 flex justify-center">
+                      <div className="w-4 sm:w-8 flex justify-center">
                         {getTrendIcon(player.trend)}
                       </div>
                     </div>
@@ -229,35 +224,35 @@ const Classement = () => {
           </TabsContent>
 
           {/* Team Ranking */}
-          <TabsContent value="teams" className="space-y-3">
+          <TabsContent value="teams" className="space-y-2">
             {teamRanking.map((team) => {
               return (
                 <Card 
                   key={team.rank} 
-                  className="p-4 hover:border-primary/50 transition-all"
+                  className="p-2 sm:p-4 hover:border-primary/50 transition-all"
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center font-bold text-foreground">
+                  <div className="flex items-center justify-between gap-2 sm:gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                      <div className="w-6 h-6 sm:w-10 sm:h-10 rounded-lg bg-muted flex items-center justify-center font-bold text-foreground text-xs sm:text-base flex-shrink-0">
                         {team.rank}
                       </div>
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                        <Users className="w-6 h-6 text-white" />
+                      <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
+                        <Users className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-lg mb-1">{team.name}</h3>
-                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                          <span>{team.members} membres</span>
-                          <span className="flex items-center gap-1">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-sm sm:text-lg truncate">{team.name}</h3>
+                        <div className="flex items-center gap-2 sm:gap-3 text-xs text-muted-foreground">
+                          <span>{team.members}m</span>
+                          <span className="hidden sm:inline flex items-center gap-1">
                             <Star className="w-3 h-3" />
-                            {team.totalXP} XP
+                            {team.totalXP}
                           </span>
                         </div>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-primary">{team.avgScore}</div>
-                      <div className="text-xs text-muted-foreground">moy./membre</div>
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-base sm:text-2xl font-bold text-primary">{team.avgScore}</div>
+                      <div className="text-xs text-muted-foreground">moy.</div>
                     </div>
                   </div>
                 </Card>
