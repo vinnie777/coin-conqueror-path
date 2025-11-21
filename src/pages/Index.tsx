@@ -79,12 +79,25 @@ const Index = () => {
                 ▶ COMMENCER L'AVENTURE
               </Button>
             </Link>
-            <Link to="/dashboard" className="w-full sm:w-auto hidden sm:block">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto font-bold border-2 sm:border-4 border-border shadow-xl text-base sm:text-xl px-6 sm:px-10 py-5 sm:py-7 bg-white">
-                📊 Tableau de bord
-              </Button>
-            </Link>
           </div>
+
+          {/* Dashboard Card */}
+          <Link to="/dashboard" className="block max-w-md mx-auto mt-6 sm:mt-8">
+            <div className="bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-xl sm:rounded-2xl border-2 sm:border-3 border-primary p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl sm:text-3xl shadow-lg">
+                    📊
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-base sm:text-xl font-bold text-foreground">Tableau de bord</h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground font-semibold">Accède à tes stats et progression</p>
+                  </div>
+                </div>
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
+              </div>
+            </div>
+          </Link>
         </div>
       </section>
 
