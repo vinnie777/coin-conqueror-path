@@ -241,7 +241,9 @@ const Quiz = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-3">
-            <img src={logo} alt="Edufin360" className="w-8 h-8" />
+            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Flow
+            </h1>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-sm">

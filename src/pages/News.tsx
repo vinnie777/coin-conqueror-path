@@ -60,8 +60,11 @@ const News = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-3">
-            <img src={logo} alt="Edufin360" className="w-10 h-10" />
+            <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Flow
+            </h1>
           </div>
+          <div className="w-20"></div>
         </div>
       </nav>
 

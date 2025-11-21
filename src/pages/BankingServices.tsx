@@ -93,7 +93,9 @@ const BankingServices = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
-            <img src={logo} alt="Edufin360" className="w-8 h-8 sm:w-10 sm:h-10" />
+            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Flow
+            </h1>
           </div>
           <a href="https://mabanque.bnpparibas/" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" className="font-bold border-2">
