@@ -13,6 +13,7 @@ import Portfolio from "./pages/Portfolio";
 import Referral from "./pages/Referral";
 import BankingServices from "./pages/BankingServices";
 import News from "./pages/News";
+import Classement from "./pages/Classement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/referral" element={<Referral />} />
             <Route path="/banking" element={<BankingServices />} />
             <Route path="/news" element={<News />} />
+            <Route path="/classement" element={<Classement />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

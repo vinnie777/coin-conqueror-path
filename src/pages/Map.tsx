@@ -154,8 +154,20 @@ const Map = () => {
           </h1>
         </div>
         
+        {/* Classement Button */}
+        <div className="mt-4 sm:mt-6">
+          <Link to="/classement">
+            <Button 
+              variant="outline" 
+              className="font-semibold border-primary/50 hover:bg-primary/10 hover:border-primary"
+            >
+              🏆 Classement
+            </Button>
+          </Link>
+        </div>
+        
         {/* Stats Bar */}
-        <div className="flex items-center justify-center gap-3 sm:gap-6 mt-6 sm:mt-8">
+        <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6">
           <div className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-card/90 backdrop-blur rounded-lg border border-border shadow-md">
             <Star className="w-4 h-4 sm:w-5 sm:h-5 text-secondary fill-secondary" />
             <span className="font-semibold text-sm sm:text-base text-foreground">800 XP</span>
