@@ -18,9 +18,6 @@ const Index = () => {
             <Link to="/news">
               <Button variant="outline" className="font-semibold">News</Button>
             </Link>
-            <Link to="/auth">
-              <Button variant="outline" className="font-semibold">Connexion</Button>
-            </Link>
             <Link to="/map">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-premium text-sm sm:text-base px-3 sm:px-4">
                 Commencer
