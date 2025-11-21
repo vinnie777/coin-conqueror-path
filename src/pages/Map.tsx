@@ -107,12 +107,19 @@ const zones = [
 
 const Map = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-sky-200 to-green-100 relative overflow-hidden">
+      {/* Decorative clouds */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-10 left-10 w-32 h-16 bg-white/60 rounded-full blur-sm"></div>
+        <div className="absolute top-20 right-20 w-40 h-20 bg-white/50 rounded-full blur-sm"></div>
+        <div className="absolute top-40 left-1/3 w-36 h-18 bg-white/40 rounded-full blur-sm"></div>
+      </div>
+
       {/* Navigation */}
-      <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="font-bold">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Retour
             </Button>
@@ -120,182 +127,177 @@ const Map = () => {
           <div className="flex items-center gap-3">
             <img src={logo} alt="Edufin360" className="w-10 h-10" />
           </div>
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-400 border-2 border-yellow-600 shadow-lg">
               <span className="text-2xl">🪙</span>
-              <span className="font-bold text-lg">1,250</span>
-              <span className="text-sm text-muted-foreground">InvestCoins</span>
+              <span className="font-bold text-lg text-yellow-900">1,250</span>
             </div>
             <Link to="/dashboard">
-              <Button variant="outline">Tableau de bord</Button>
+              <Button variant="outline" className="font-bold border-2">Tableau de bord</Button>
             </Link>
           </div>
         </div>
       </nav>
 
-      {/* Header */}
-      <section className="container mx-auto px-4 py-12 text-center">
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          Carte de l'Aventure Financière
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Parcours les 7 zones pour maîtriser l'univers de la finance. Chaque zone débloque de nouvelles connaissances et récompenses.
-        </p>
+      {/* World Header */}
+      <div className="container mx-auto px-4 py-8 text-center relative z-10">
+        <div className="inline-block bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 px-8 py-4 rounded-2xl border-4 border-yellow-600 shadow-2xl transform -rotate-1">
+          <h1 className="text-5xl font-black text-yellow-900 tracking-tight" style={{ textShadow: '3px 3px 0px rgba(0,0,0,0.2)' }}>
+            MONDE FINANCIER
+          </h1>
+        </div>
         
-        {/* Progress Bar */}
-        <div className="max-w-xl mx-auto mt-8">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium">Progression globale</span>
-            <div className="flex items-center gap-2">
-              <Star className="w-4 h-4 text-accent fill-accent" />
-              <span className="text-sm font-bold text-primary">800 XP</span>
-            </div>
+        {/* Stats Bar */}
+        <div className="flex items-center justify-center gap-6 mt-6">
+          <div className="flex items-center gap-2 px-6 py-3 bg-white/90 rounded-full border-3 border-gray-800 shadow-lg">
+            <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+            <span className="font-bold text-gray-800">800 XP</span>
           </div>
-          <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-primary via-secondary to-accent transition-all duration-500" style={{ width: "23%" }}></div>
-          </div>
-          <div className="flex items-center justify-between mt-2">
-            <span className="text-xs text-muted-foreground">Zone 1 complétée • Zone 2 en cours</span>
-            <span className="text-xs font-bold text-primary">1/7 zones</span>
+          <div className="flex items-center gap-2 px-6 py-3 bg-white/90 rounded-full border-3 border-gray-800 shadow-lg">
+            <Award className="w-5 h-5 text-red-500 fill-red-500" />
+            <span className="font-bold text-gray-800">1/7 Zones</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Map Zones */}
-      <section className="container mx-auto px-4 pb-20">
-        <div className="max-w-6xl mx-auto grid gap-8">
-          {zones.map((zone, index) => {
-            const isUnlocked = zone.status === "unlocked";
-            const isCurrent = zone.status === "current";
-            const isLocked = zone.status === "locked";
-            const progress = (zone.completedLevels / zone.levels) * 100;
+      {/* Game Map Path */}
+      <div className="container mx-auto px-4 pb-20 relative">
+        <div className="max-w-5xl mx-auto relative">
+          {/* SVG Path connecting zones */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+            <path
+              d="M 150 100 Q 200 150, 250 100 T 450 100 Q 550 150, 650 200 T 850 300 Q 900 400, 800 500 T 450 600 Q 300 650, 150 700"
+              stroke="rgba(255,255,255,0.8)"
+              strokeWidth="12"
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray="20,10"
+            />
+          </svg>
 
-            return (
-              <Card 
-                key={zone.id}
-                className={`overflow-hidden border-2 transition-all duration-300 hover:scale-[1.02] ${
-                  isCurrent ? "border-primary shadow-xl shadow-primary/20 animate-pulse-glow" :
-                  isUnlocked ? "border-secondary/50 hover:border-secondary" :
-                  "border-border/50 opacity-70"
-                }`}
-              >
-                <div className="flex flex-col md:flex-row">
-                  {/* Zone Image */}
-                  <div className="relative md:w-80 h-64 md:h-auto overflow-hidden">
-                    <img 
-                      src={zone.image} 
-                      alt={zone.name}
-                      className={`w-full h-full object-cover transition-all duration-500 ${
-                        isLocked ? "grayscale blur-sm" : "hover:scale-110"
-                      }`}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-card md:to-card"></div>
-                    
-                    {/* Zone Number Badge */}
-                    <div className={`absolute top-4 left-4 w-16 h-16 rounded-2xl bg-gradient-to-br ${zone.color} flex items-center justify-center text-4xl shadow-lg ${isLocked && "grayscale"}`}>
-                      {zone.icon}
-                    </div>
+          {/* Zone Nodes */}
+          <div className="relative space-y-32 pt-10" style={{ zIndex: 1 }}>
+            {zones.map((zone, index) => {
+              const isUnlocked = zone.status === "unlocked";
+              const isCurrent = zone.status === "current";
+              const isLocked = zone.status === "locked";
+              
+              // Alternating left/right positioning
+              const isLeft = index % 2 === 0;
+              const positions = [
+                { x: 150, y: 100 },   // Zone 1 - left
+                { x: 650, y: 200 },   // Zone 2 - right
+                { x: 200, y: 300 },   // Zone 3 - left
+                { x: 700, y: 400 },   // Zone 4 - right
+                { x: 250, y: 500 },   // Zone 5 - left
+                { x: 650, y: 600 },   // Zone 6 - right
+                { x: 300, y: 700 }    // Zone 7 - left
+              ];
 
-                    {/* Status Indicator */}
-                    {isUnlocked && (
-                      <div className="absolute top-4 right-4 w-10 h-10 bg-secondary rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                        <CheckCircle className="w-6 h-6 text-white" />
+              return (
+                <div
+                  key={zone.id}
+                  className={`flex items-center gap-8 ${isLeft ? 'justify-start' : 'justify-end'} animate-fade-in`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {/* Zone Content Card */}
+                  <Card 
+                    className={`w-80 border-4 shadow-2xl transition-all duration-300 hover:scale-105 ${
+                      isCurrent ? 'border-red-500 animate-pulse-glow' :
+                      isUnlocked ? 'border-green-500' :
+                      'border-gray-400 opacity-60'
+                    } ${isLeft ? 'order-2' : 'order-1'}`}
+                  >
+                    <div className="p-0 overflow-hidden">
+                      {/* Zone Image */}
+                      <div className="relative h-48 overflow-hidden">
+                        <img 
+                          src={zone.image} 
+                          alt={zone.name}
+                          className={`w-full h-full object-cover ${isLocked ? 'grayscale' : ''}`}
+                        />
+                        {isLocked && (
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                            <Lock className="w-12 h-12 text-white" />
+                          </div>
+                        )}
                       </div>
-                    )}
-                    {isLocked && (
-                      <div className="absolute top-4 right-4 w-10 h-10 bg-muted rounded-full flex items-center justify-center shadow-lg">
-                        <Lock className="w-5 h-5 text-muted-foreground" />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Zone Info */}
-                  <div className="flex-1 p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-3xl font-bold">{zone.name}</h3>
-                          {isCurrent && (
-                            <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20 animate-pulse">
-                              En cours
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-muted-foreground text-lg mb-4">{zone.description}</p>
-                      </div>
-                    </div>
-
-                    {/* Level Progress */}
-                    {(isUnlocked || isCurrent) && (
-                      <div className="mb-4">
+                      
+                      {/* Zone Info */}
+                      <div className="p-4 bg-white">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium">Niveaux</span>
-                          <span className="text-sm font-bold text-primary">{zone.completedLevels}/{zone.levels}</span>
+                          <h3 className="font-black text-xl text-gray-800">{zone.name}</h3>
+                          {isUnlocked && <CheckCircle className="w-6 h-6 text-green-500 fill-green-500" />}
+                          {isCurrent && <Play className="w-6 h-6 text-red-500 fill-red-500 animate-pulse" />}
                         </div>
-                        <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                          <div 
-                            className={`h-full bg-gradient-to-r ${zone.color} transition-all duration-500`}
-                            style={{ width: `${progress}%` }}
-                          ></div>
-                        </div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Award className="w-4 h-4 text-accent" />
-                          <span className="text-xs text-muted-foreground">{zone.xp} XP gagnés</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Rewards */}
-                    <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                        <span>🎁</span>
-                        Récompenses
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {zone.rewards.map((reward, i) => (
-                          <span 
-                            key={i}
-                            className="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium border border-accent/20"
-                          >
-                            {reward}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex items-center gap-4 mt-6">
-                      {(isUnlocked || isCurrent) ? (
-                        <>
-                          <Link to={`/quiz/${zone.id}`} className="flex-1">
-                            <Button className={`w-full ${isCurrent ? "bg-gradient-to-r from-primary to-secondary" : ""}`}>
-                              <Play className="w-4 h-4 mr-2" />
-                              {isCurrent ? "Continuer l'aventure" : "Rejouer"}
+                        <p className="text-sm text-gray-600 mb-3">{zone.description}</p>
+                        
+                        {/* Progress for unlocked/current zones */}
+                        {(isUnlocked || isCurrent) && (
+                          <div className="mb-3">
+                            <div className="flex items-center justify-between text-xs mb-1">
+                              <span className="font-bold text-gray-700">Niveaux</span>
+                              <span className="font-bold text-gray-900">{zone.completedLevels}/{zone.levels}</span>
+                            </div>
+                            <div className="h-2 bg-gray-200 rounded-full overflow-hidden border border-gray-400">
+                              <div 
+                                className={`h-full bg-gradient-to-r ${zone.color}`}
+                                style={{ width: `${(zone.completedLevels / zone.levels) * 100}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {/* Action Button */}
+                        {(isUnlocked || isCurrent) ? (
+                          <Link to={`/quiz/${zone.id}`}>
+                            <Button 
+                              className={`w-full font-bold border-2 shadow-lg ${
+                                isCurrent 
+                                  ? 'bg-gradient-to-r from-red-500 to-orange-500 border-red-700 hover:from-red-600 hover:to-orange-600' 
+                                  : 'bg-gradient-to-r from-green-500 to-emerald-500 border-green-700 hover:from-green-600 hover:to-emerald-600'
+                              }`}
+                            >
+                              {isCurrent ? '▶ JOUER' : '↻ REJOUER'}
                             </Button>
                           </Link>
-                          {isUnlocked && (
-                            <div className="flex items-center gap-2 text-sm text-secondary font-medium px-4 py-2 rounded-lg bg-secondary/10 border border-secondary/20">
-                              <CheckCircle className="w-4 h-4" />
-                              Complétée
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        <Button disabled variant="outline" className="flex-1">
-                          <Lock className="w-4 h-4 mr-2" />
-                          Complète la zone précédente pour débloquer
-                        </Button>
-                      )}
+                        ) : (
+                          <Button disabled className="w-full font-bold border-2 border-gray-400 opacity-50">
+                            🔒 VERROUILLÉ
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+
+                  {/* Zone Node/Icon */}
+                  <div className={`relative ${isLeft ? 'order-1' : 'order-2'}`}>
+                    <div 
+                      className={`w-24 h-24 rounded-full flex items-center justify-center text-5xl border-4 shadow-2xl transition-transform duration-300 ${
+                        isCurrent 
+                          ? 'bg-gradient-to-br from-red-400 to-red-600 border-red-800 animate-bounce' 
+                          : isUnlocked 
+                          ? 'bg-gradient-to-br from-green-400 to-green-600 border-green-800' 
+                          : 'bg-gradient-to-br from-gray-400 to-gray-600 border-gray-800 grayscale'
+                      }`}
+                    >
+                      {zone.icon}
+                    </div>
+                    
+                    {/* Zone Number */}
+                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-10 h-10 bg-white border-3 border-gray-800 rounded-full flex items-center justify-center font-black text-gray-800 shadow-lg">
+                      {zone.id}
                     </div>
                   </div>
                 </div>
-              </Card>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
+
 
 export default Map;
