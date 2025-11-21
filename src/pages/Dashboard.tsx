@@ -84,53 +84,6 @@ const Dashboard = () => {
           </Link>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <Card className="p-6 border-2 border-primary/20 hover:border-primary/50 transition-all duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center">
-                <Coins className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-3xl">🪙</span>
-            </div>
-            <div className="text-3xl font-bold text-primary mb-1">1,250</div>
-            <div className="text-sm text-muted-foreground">InvestCoins</div>
-          </Card>
-
-          <Card className="p-6 border-2 border-secondary/20 hover:border-secondary/50 transition-all duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-green-600 flex items-center justify-center">
-                <Flame className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-3xl">🔥</span>
-            </div>
-            <div className="text-3xl font-bold text-secondary mb-1">5 jours</div>
-            <div className="text-sm text-muted-foreground">Streak actuel</div>
-          </Card>
-
-          <Card className="p-6 border-2 border-accent/20 hover:border-accent/50 transition-all duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-orange-600 flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-3xl">🗺️</span>
-            </div>
-            <div className="text-3xl font-bold text-accent mb-1">1/7</div>
-            <div className="text-sm text-muted-foreground">Zones complétées</div>
-          </Card>
-
-          <Card className="p-6 border-2 border-border hover:border-primary/50 transition-all duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-3xl">🏅</span>
-            </div>
-            <div className="text-3xl font-bold mb-1">#42</div>
-            <div className="text-sm text-muted-foreground">Classement</div>
-          </Card>
-        </div>
-
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column */}
