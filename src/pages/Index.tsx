@@ -20,6 +20,9 @@ const Index = () => {
       <nav className="border-b bg-white backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-end">
           <div className="flex gap-2 sm:gap-3">
+            <Link to="/news">
+              <Button variant="outline" className="font-bold border-2">📰 News</Button>
+            </Link>
             <Link to="/map" className="hidden sm:block">
               <Button variant="outline" className="font-bold border-2">Connexion</Button>
             </Link>
