@@ -98,55 +98,49 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Section with Images */}
+      {/* How it Works Section */}
       <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-16 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
-            {[
-              {
-                step: "01",
-                title: "Explore la Carte",
-                description: "Débute ton voyage dans la Baie des Fondamentaux et progresse à travers 7 zones thématiques.",
-                gradient: "from-primary to-secondary",
-                image: zone1
-              },
-              {
-                step: "02",
-                title: "Complète les Défis",
-                description: "Réponds à des quiz, regarde des vidéos et relève des défis quotidiens pour avancer.",
-                gradient: "from-secondary to-accent",
-                image: zone2
-              },
-              {
-                step: "03",
-                title: "Gagne des Récompenses",
-                description: "Accumule des InvestCoins, débloque des badges et grimpe dans le classement.",
-                gradient: "from-accent to-primary",
-                image: zone3
-              }
-            ].map((feature, i) => (
-              <div 
-                key={i}
-                className="relative overflow-hidden rounded-lg bg-card border border-border shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-premium animate-scale-in group"
-                style={{ animationDelay: `${i * 0.15}s` }}
-              >
-                <div className="relative h-32 sm:h-48 overflow-hidden">
-                  <img 
-                    src={feature.image} 
-                    alt={feature.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className={`absolute top-2 left-2 sm:top-4 sm:left-4 w-10 h-10 sm:w-14 sm:h-14 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg`}>
-                    {feature.step}
-                  </div>
-                </div>
-                <div className="p-4 sm:p-6 bg-card">
-                  <h4 className="text-lg sm:text-xl font-semibold text-foreground mb-2">{feature.title}</h4>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{feature.description}</p>
-                </div>
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
+            Comment ça marche ?
+          </h3>
+          
+          <div className="space-y-6 sm:space-y-8">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
+                1
               </div>
-            ))}
+              <div>
+                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Explore la Carte</h4>
+                <p className="text-base sm:text-lg text-muted-foreground">
+                  Débute ton voyage dans la Baie des Fondamentaux et progresse à travers 7 zones thématiques.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-white font-bold">
+                2
+              </div>
+              <div>
+                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Complète les Défis</h4>
+                <p className="text-base sm:text-lg text-muted-foreground">
+                  Réponds à des quiz, regarde des vidéos et relève des défis quotidiens pour avancer.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white font-bold">
+                3
+              </div>
+              <div>
+                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Gagne des Récompenses</h4>
+                <p className="text-base sm:text-lg text-muted-foreground">
+                  Accumule des InvestCoins, débloque des badges et grimpe dans le classement.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
