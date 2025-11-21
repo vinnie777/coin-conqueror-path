@@ -16,7 +16,7 @@ const Index = () => {
             <Link to="/news">
               <Button variant="outline" className="font-semibold">News</Button>
             </Link>
-            <Link to="/map" className="hidden sm:block">
+            <Link to="/auth">
               <Button variant="outline" className="font-semibold">Connexion</Button>
             </Link>
             <Link to="/map">
