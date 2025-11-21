@@ -2,66 +2,76 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, CheckCircle, XCircle, Zap, Award, TrendingUp } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle, Zap, Award, TrendingUp, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.png";
 import zone2Img from "@/assets/zone2-desert.png";
+import quizReturn from "@/assets/quiz-return.png";
+import quizInflation from "@/assets/quiz-inflation.png";
+import quizRisk from "@/assets/quiz-risk.png";
+import quizAsset from "@/assets/quiz-asset.png";
+import quizDiversification from "@/assets/quiz-diversification.png";
 
 const quizQuestions = [
   {
     question: "Qu'est-ce que le rendement d'un investissement ?",
     options: [
-      "Le gain ou la perte financière générée par un investissement",
-      "Le montant initial investi",
-      "Le temps nécessaire pour doubler son investissement",
-      "Le niveau de risque associé à un investissement"
+      { text: "Le gain ou la perte financière générée par un investissement", emoji: "📈" },
+      { text: "Le montant initial investi", emoji: "💰" },
+      { text: "Le temps nécessaire pour doubler son investissement", emoji: "⏰" },
+      { text: "Le niveau de risque associé à un investissement", emoji: "⚠️" }
     ],
     correctAnswer: 0,
-    explanation: "Le rendement représente le gain ou la perte générée par un investissement, généralement exprimé en pourcentage du capital initial."
+    explanation: "Le rendement représente le gain ou la perte générée par un investissement, généralement exprimé en pourcentage du capital initial.",
+    image: quizReturn
   },
   {
     question: "Qu'est-ce que l'inflation ?",
     options: [
-      "La hausse des taux d'intérêt",
-      "L'augmentation générale des prix au fil du temps",
-      "La baisse de la valeur des actions",
-      "L'augmentation des salaires"
+      { text: "La hausse des taux d'intérêt", emoji: "📊" },
+      { text: "L'augmentation générale des prix au fil du temps", emoji: "🛒" },
+      { text: "La baisse de la valeur des actions", emoji: "📉" },
+      { text: "L'augmentation des salaires", emoji: "💵" }
     ],
     correctAnswer: 1,
-    explanation: "L'inflation est l'augmentation générale et durable des prix des biens et services, ce qui réduit le pouvoir d'achat de la monnaie."
+    explanation: "L'inflation est l'augmentation générale et durable des prix des biens et services, ce qui réduit le pouvoir d'achat de la monnaie.",
+    image: quizInflation
   },
   {
     question: "Quelle est la relation entre risque et rendement ?",
     options: [
-      "Plus le risque est élevé, plus le rendement potentiel est faible",
-      "Le risque et le rendement ne sont pas liés",
-      "Plus le risque est élevé, plus le rendement potentiel est élevé",
-      "Le risque élimine toujours le rendement"
+      { text: "Plus le risque est élevé, plus le rendement potentiel est faible", emoji: "📉" },
+      { text: "Le risque et le rendement ne sont pas liés", emoji: "❓" },
+      { text: "Plus le risque est élevé, plus le rendement potentiel est élevé", emoji: "🎯" },
+      { text: "Le risque élimine toujours le rendement", emoji: "⛔" }
     ],
     correctAnswer: 2,
-    explanation: "En général, plus un investissement est risqué, plus le rendement potentiel est élevé pour compenser ce risque pris par l'investisseur."
+    explanation: "En général, plus un investissement est risqué, plus le rendement potentiel est élevé pour compenser ce risque pris par l'investisseur.",
+    image: quizRisk
   },
   {
     question: "Qu'est-ce qu'un actif ?",
     options: [
-      "Une dette à rembourser",
-      "Un bien ou un placement qui a une valeur économique",
-      "Un prêt accordé par une banque",
-      "Une dépense mensuelle"
+      { text: "Une dette à rembourser", emoji: "💳" },
+      { text: "Un bien ou un placement qui a une valeur économique", emoji: "🏢" },
+      { text: "Un prêt accordé par une banque", emoji: "🏦" },
+      { text: "Une dépense mensuelle", emoji: "📝" }
     ],
     correctAnswer: 1,
-    explanation: "Un actif est un bien ou un placement qui possède une valeur économique et qui peut générer des revenus ou prendre de la valeur."
+    explanation: "Un actif est un bien ou un placement qui possède une valeur économique et qui peut générer des revenus ou prendre de la valeur.",
+    image: quizAsset
   },
   {
     question: "Pourquoi est-il important de diversifier ses investissements ?",
     options: [
-      "Pour augmenter les frais de gestion",
-      "Pour compliquer la gestion du portefeuille",
-      "Pour réduire le risque global",
-      "Pour garantir des pertes"
+      { text: "Pour augmenter les frais de gestion", emoji: "💸" },
+      { text: "Pour compliquer la gestion du portefeuille", emoji: "🤔" },
+      { text: "Pour réduire le risque global", emoji: "🛡️" },
+      { text: "Pour garantir des pertes", emoji: "❌" }
     ],
     correctAnswer: 2,
-    explanation: "La diversification permet de répartir les risques en investissant dans différents types d'actifs, réduisant ainsi l'impact d'une mauvaise performance d'un seul investissement."
+    explanation: "La diversification permet de répartir les risques en investissant dans différents types d'actifs, réduisant ainsi l'impact d'une mauvaise performance d'un seul investissement.",
+    image: quizDiversification
   }
 ];
 
@@ -256,61 +266,125 @@ const Quiz = () => {
 
       {/* Quiz Content */}
       <div className="container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto">
-          <Card className="p-8 animate-scale-in">
-            <h2 className="text-3xl font-bold mb-8">{question.question}</h2>
+        <div className="max-w-4xl mx-auto">
+          <Card className="overflow-hidden border-2 border-primary/20 shadow-2xl animate-scale-in">
+            {/* Question Image Header */}
+            <div className="relative h-64 md:h-80 overflow-hidden">
+              <img 
+                src={question.image}
+                alt="Question illustration"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-transparent"></div>
+              
+              {/* Floating Question Number */}
+              <div className="absolute top-6 left-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-xl">
+                <span className="text-3xl font-bold text-white">{currentQuestion + 1}</span>
+              </div>
 
-            <div className="space-y-4 mb-8">
-              {question.options.map((option, index) => {
-                const isSelected = selectedAnswer === index;
-                const isCorrect = index === question.correctAnswer;
-                const showCorrect = showExplanation && isCorrect;
-                const showWrong = showExplanation && isSelected && !isCorrect;
+              {/* Score indicator */}
+              <div className="absolute top-6 right-6 px-4 py-2 rounded-full bg-card/90 backdrop-blur-sm border-2 border-accent/30 shadow-lg">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-accent" />
+                  <span className="font-bold text-accent">{score * 30} coins</span>
+                </div>
+              </div>
 
-                return (
-                  <button
-                    key={index}
-                    onClick={() => handleAnswer(index)}
-                    disabled={showExplanation}
-                    className={`w-full p-5 rounded-xl text-left transition-all duration-300 ${
-                      showCorrect
-                        ? "bg-secondary/20 border-2 border-secondary"
-                        : showWrong
-                        ? "bg-destructive/20 border-2 border-destructive"
-                        : isSelected
-                        ? "bg-primary/20 border-2 border-primary"
-                        : "bg-card border-2 border-border hover:border-primary/50 hover:bg-card/80"
-                    } ${showExplanation ? "cursor-not-allowed" : "cursor-pointer"}`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-lg font-medium">{option}</span>
-                      {showCorrect && <CheckCircle className="w-6 h-6 text-secondary" />}
-                      {showWrong && <XCircle className="w-6 h-6 text-destructive" />}
-                    </div>
-                  </button>
-                );
-              })}
+              {/* Question text overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+                  {question.question}
+                </h2>
+              </div>
             </div>
 
-            {showExplanation && (
-              <div className="p-6 rounded-xl bg-primary/10 border border-primary/20 mb-6 animate-fade-in">
-                <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
-                  <span className="text-2xl">💡</span>
-                  Explication
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">{question.explanation}</p>
-              </div>
-            )}
+            <div className="p-8">
+              <div className="grid md:grid-cols-2 gap-4 mb-8">
+                {question.options.map((option, index) => {
+                  const isSelected = selectedAnswer === index;
+                  const isCorrect = index === question.correctAnswer;
+                  const showCorrect = showExplanation && isCorrect;
+                  const showWrong = showExplanation && isSelected && !isCorrect;
 
-            {showExplanation && (
-              <Button 
-                onClick={handleNext}
-                size="lg"
-                className="w-full bg-gradient-to-r from-primary to-secondary animate-fade-in"
-              >
-                {currentQuestion < quizQuestions.length - 1 ? "Question suivante" : "Voir les résultats"}
-              </Button>
-            )}
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => handleAnswer(index)}
+                      disabled={showExplanation}
+                      className={`group relative p-6 rounded-2xl text-left transition-all duration-300 transform ${
+                        showCorrect
+                          ? "bg-gradient-to-br from-secondary/30 to-secondary/10 border-2 border-secondary scale-105 shadow-xl"
+                          : showWrong
+                          ? "bg-gradient-to-br from-destructive/30 to-destructive/10 border-2 border-destructive scale-95 opacity-60"
+                          : isSelected
+                          ? "bg-gradient-to-br from-primary/30 to-primary/10 border-2 border-primary scale-105 shadow-lg"
+                          : "bg-gradient-to-br from-card to-muted/30 border-2 border-border hover:border-primary/50 hover:scale-105 hover:shadow-lg"
+                      } ${showExplanation ? "cursor-not-allowed" : "cursor-pointer hover:-translate-y-1"}`}
+                    >
+                      {/* Emoji badge */}
+                      <div className={`absolute -top-3 -left-3 w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-lg transition-transform duration-300 ${
+                        showCorrect ? "bg-secondary scale-110" :
+                        showWrong ? "bg-destructive/80 scale-90" :
+                        isSelected ? "bg-primary" :
+                        "bg-gradient-to-br from-accent to-accent/70 group-hover:scale-110"
+                      }`}>
+                        {option.emoji}
+                      </div>
+
+                      <div className="flex items-start justify-between gap-4 mt-2">
+                        <span className="text-lg font-medium leading-snug pr-4">{option.text}</span>
+                        <div className="flex-shrink-0">
+                          {showCorrect && (
+                            <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center animate-scale-in">
+                              <CheckCircle className="w-5 h-5 text-white" />
+                            </div>
+                          )}
+                          {showWrong && (
+                            <div className="w-8 h-8 rounded-full bg-destructive flex items-center justify-center animate-scale-in">
+                              <XCircle className="w-5 h-5 text-white" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Hover glow effect */}
+                      {!showExplanation && (
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {showExplanation && (
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 border-2 border-primary/20 mb-6 animate-fade-in">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <span className="text-3xl">💡</span>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-xl mb-3 flex items-center gap-2">
+                        Explication
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed text-lg">{question.explanation}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {showExplanation && (
+                <Button 
+                  onClick={handleNext}
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 text-lg py-6 animate-fade-in shadow-lg"
+                >
+                  <span className="mr-2">
+                    {currentQuestion < quizQuestions.length - 1 ? "Question suivante" : "Voir les résultats"}
+                  </span>
+                  <Sparkles className="w-5 h-5" />
+                </Button>
+              )}
+            </div>
           </Card>
         </div>
       </div>
