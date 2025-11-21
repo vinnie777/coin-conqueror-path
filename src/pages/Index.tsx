@@ -72,8 +72,11 @@ const Index = () => {
               </h3>
               <Trophy className="w-8 h-8 sm:w-12 sm:h-12 text-white" />
             </div>
-            <p className="text-sm sm:text-xl font-bold text-white">
+            <p className="text-sm sm:text-xl font-bold text-white mb-1">
               À GAGNER DANS LE CHALLENGE !
+            </p>
+            <p className="text-xs sm:text-sm text-white/80">
+              Financé par Anna Mronz
             </p>
           </div>
 
