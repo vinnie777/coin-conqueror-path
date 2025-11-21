@@ -125,7 +125,9 @@ const Map = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
-            <img src={logo} alt="Edufin360" className="w-8 h-8 sm:w-10 sm:h-10" />
+            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Flow
+            </h1>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
             <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-primary to-primary/80 shadow-lg">

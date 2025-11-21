@@ -31,6 +31,13 @@ const Index = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-2 sm:px-4 py-8 sm:py-16 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
+          <div className="mb-4">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
+              Flow
+            </h1>
+            <p className="text-sm sm:text-base text-muted-foreground font-medium">L'éducation financière gamifiée</p>
+          </div>
+          
           <div className="inline-block bg-gradient-to-r from-primary to-secondary px-4 sm:px-8 py-3 sm:py-6 rounded-lg shadow-premium">
             <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold text-white leading-tight">
               Transforme ton<br />
