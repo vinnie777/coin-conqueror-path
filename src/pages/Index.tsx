@@ -166,7 +166,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border bg-card/50 backdrop-blur-sm py-6 sm:py-8 relative z-10">
         <div className="container mx-auto px-2 sm:px-4 text-center">
-          <p className="text-xs sm:text-base font-medium text-muted-foreground">© 2024 Edufin360. Transforme ton apprentissage financier en aventure.</p>
+          <p className="text-xs sm:text-base font-medium text-muted-foreground">© 2024 Flow. Transforme ton apprentissage financier en aventure.</p>
         </div>
       </footer>
     </div>
