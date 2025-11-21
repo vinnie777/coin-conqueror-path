@@ -114,19 +114,12 @@ const zones = [
 
 const Map = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-sky-200 to-green-100 relative overflow-hidden">
-      {/* Decorative clouds */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-16 bg-white/60 rounded-full blur-sm"></div>
-        <div className="absolute top-20 right-20 w-40 h-20 bg-white/50 rounded-full blur-sm"></div>
-        <div className="absolute top-40 left-1/3 w-36 h-18 bg-white/40 rounded-full blur-sm"></div>
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
       {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2">
+      <nav className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-50 shadow-md">
+        <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
           <Link to="/">
-            <Button variant="ghost" size="sm" className="font-bold h-8 sm:h-10 px-2 sm:px-4">
+            <Button variant="ghost" size="sm" className="font-semibold h-8 sm:h-10 px-2 sm:px-4">
               <ArrowLeft className="w-4 h-4 sm:mr-2" />
               <span className="hidden sm:inline">Retour</span>
             </Button>
@@ -135,15 +128,15 @@ const Map = () => {
             <img src={logo} alt="Edufin360" className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
-            <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-400 border-2 border-yellow-600 shadow-lg">
-              <span className="text-lg sm:text-2xl">🪙</span>
-              <span className="font-bold text-sm sm:text-lg text-yellow-900">1,250</span>
+            <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-primary to-primary/80 shadow-lg">
+              <span className="text-base sm:text-xl">🪙</span>
+              <span className="font-bold text-sm sm:text-base text-primary-foreground">1,250</span>
             </div>
             <Link to="/dashboard" className="hidden sm:block">
-              <Button variant="outline" className="font-bold border-2">Tableau de bord</Button>
+              <Button variant="outline" className="font-semibold">Tableau de bord</Button>
             </Link>
             <Link to="/dashboard" className="sm:hidden">
-              <Button variant="outline" size="sm" className="font-bold border-2 h-8 px-2">
+              <Button variant="outline" size="sm" className="font-semibold h-8 px-2">
                 📊
               </Button>
             </Link>
@@ -152,22 +145,22 @@ const Map = () => {
       </nav>
 
       {/* World Header */}
-      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 text-center relative z-10">
-        <div className="inline-block bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 px-4 sm:px-8 py-2 sm:py-4 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-yellow-600 shadow-2xl transform -rotate-1">
-          <h1 className="text-2xl sm:text-5xl font-black text-yellow-900 tracking-tight" style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.2)' }}>
+      <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-12 text-center relative z-10">
+        <div className="inline-block bg-gradient-to-r from-primary via-primary/90 to-primary px-6 sm:px-12 py-3 sm:py-6 rounded-lg sm:rounded-xl shadow-2xl">
+          <h1 className="text-2xl sm:text-5xl font-bold text-primary-foreground tracking-tight">
             MONDE FINANCIER
           </h1>
         </div>
         
         {/* Stats Bar */}
-        <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6">
-          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-white/90 rounded-full border-2 sm:border-3 border-gray-800 shadow-lg">
-            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 fill-yellow-500" />
-            <span className="font-bold text-sm sm:text-base text-gray-800">800 XP</span>
+        <div className="flex items-center justify-center gap-3 sm:gap-6 mt-6 sm:mt-8">
+          <div className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-card/90 backdrop-blur rounded-lg border border-border shadow-md">
+            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-secondary fill-secondary" />
+            <span className="font-semibold text-sm sm:text-base text-foreground">800 XP</span>
           </div>
-          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-white/90 rounded-full border-2 sm:border-3 border-gray-800 shadow-lg">
-            <Award className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 fill-red-500" />
-            <span className="font-bold text-sm sm:text-base text-gray-800">1/7 Zones</span>
+          <div className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-card/90 backdrop-blur rounded-lg border border-border shadow-md">
+            <Award className="w-4 h-4 sm:w-5 sm:h-5 text-accent fill-accent" />
+            <span className="font-semibold text-sm sm:text-base text-foreground">1/7 Zones</span>
           </div>
         </div>
       </div>
@@ -214,10 +207,10 @@ const Map = () => {
                 >
                   {/* Zone Content Card */}
                   <Card 
-                    className={`w-full sm:w-80 border-2 sm:border-4 shadow-2xl transition-all duration-300 hover:scale-105 ${
-                      isCurrent ? 'border-red-500 animate-pulse-glow' :
-                      isUnlocked ? 'border-green-500' :
-                      'border-gray-400 opacity-60'
+                    className={`w-full sm:w-80 shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
+                      isCurrent ? 'border-primary ring-2 ring-primary/50' :
+                      isUnlocked ? 'border-secondary ring-1 ring-secondary/30' :
+                      'border-border opacity-60'
                     } ${isLeft ? 'sm:order-2' : 'sm:order-1'}`}
                   >
                     <div className="p-0 overflow-hidden">
@@ -229,29 +222,29 @@ const Map = () => {
                           className={`w-full h-full object-cover ${isLocked ? 'grayscale' : ''}`}
                         />
                         {isLocked && (
-                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center backdrop-blur-sm">
                             <Lock className="w-8 h-8 sm:w-12 sm:h-12 text-white" />
                           </div>
                         )}
                       </div>
                       
                       {/* Zone Info */}
-                      <div className="p-3 sm:p-4 bg-white">
+                      <div className="p-4 sm:p-5 bg-card">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-black text-base sm:text-xl text-gray-800">{zone.name}</h3>
-                          {isUnlocked && <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 fill-green-500" />}
-                          {isCurrent && <Play className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 fill-red-500 animate-pulse" />}
+                          <h3 className="font-bold text-base sm:text-xl text-foreground">{zone.name}</h3>
+                          {isUnlocked && <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-secondary fill-secondary" />}
+                          {isCurrent && <Play className="w-5 h-5 sm:w-6 sm:h-6 text-primary fill-primary animate-pulse" />}
                         </div>
-                        <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2">{zone.description}</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2">{zone.description}</p>
                         
                         {/* Progress for unlocked/current zones */}
                         {(isUnlocked || isCurrent) && (
-                          <div className="mb-2 sm:mb-3">
-                            <div className="flex items-center justify-between text-xs mb-1">
-                              <span className="font-bold text-gray-700">Niveaux</span>
-                              <span className="font-bold text-gray-900">{zone.completedLevels}/{zone.levels}</span>
+                          <div className="mb-3 sm:mb-4">
+                            <div className="flex items-center justify-between text-xs mb-1.5">
+                              <span className="font-semibold text-muted-foreground">Niveaux</span>
+                              <span className="font-bold text-foreground">{zone.completedLevels}/{zone.levels}</span>
                             </div>
-                            <div className="h-2 bg-gray-200 rounded-full overflow-hidden border border-gray-400">
+                            <div className="h-2 bg-muted rounded-full overflow-hidden border border-border">
                               <div 
                                 className={`h-full bg-gradient-to-r ${zone.color}`}
                                 style={{ width: `${(zone.completedLevels / zone.levels) * 100}%` }}
@@ -264,17 +257,17 @@ const Map = () => {
                         {(isUnlocked || isCurrent) ? (
                           <Link to={`/quiz/${zone.id}`}>
                             <Button 
-                              className={`w-full font-bold border-2 shadow-lg text-sm sm:text-base ${
+                              className={`w-full font-semibold shadow-md text-sm sm:text-base ${
                                 isCurrent 
-                                  ? 'bg-gradient-to-r from-red-500 to-orange-500 border-red-700 hover:from-red-600 hover:to-orange-600' 
-                                  : 'bg-gradient-to-r from-green-500 to-emerald-500 border-green-700 hover:from-green-600 hover:to-emerald-600'
+                                  ? 'bg-primary hover:bg-primary/90' 
+                                  : 'bg-secondary hover:bg-secondary/90'
                               }`}
                             >
                               {isCurrent ? '▶ JOUER' : '↻ REJOUER'}
                             </Button>
                           </Link>
                         ) : (
-                          <Button disabled className="w-full font-bold border-2 border-gray-400 opacity-50 text-sm sm:text-base">
+                          <Button disabled className="w-full font-semibold opacity-50 text-sm sm:text-base">
                             🔒 VERROUILLÉ
                           </Button>
                         )}
@@ -292,28 +285,28 @@ const Map = () => {
                             key={i}
                             className={`w-5 h-5 ${
                               i < zone.stars
-                                ? 'text-yellow-400 fill-yellow-400'
-                                : 'text-gray-400 fill-gray-300'
-                            } drop-shadow-lg`}
+                                ? 'text-secondary fill-secondary'
+                                : 'text-muted fill-muted'
+                            } drop-shadow-md`}
                           />
                         ))}
                       </div>
                     )}
                     
                     <div 
-                      className={`w-24 h-24 rounded-full flex items-center justify-center text-5xl border-4 shadow-2xl transition-transform duration-300 ${
+                      className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center text-4xl sm:text-5xl border-2 shadow-xl transition-transform duration-300 ${
                         isCurrent 
-                          ? 'bg-gradient-to-br from-red-400 to-red-600 border-red-800 animate-bounce' 
+                          ? 'bg-gradient-to-br from-primary to-primary/80 border-primary animate-pulse' 
                           : isUnlocked 
-                          ? 'bg-gradient-to-br from-green-400 to-green-600 border-green-800' 
-                          : 'bg-gradient-to-br from-gray-400 to-gray-600 border-gray-800 grayscale'
+                          ? 'bg-gradient-to-br from-secondary to-secondary/80 border-secondary' 
+                          : 'bg-gradient-to-br from-muted to-muted/60 border-border grayscale'
                       }`}
                     >
                       {zone.icon}
                     </div>
                     
                     {/* Zone Number */}
-                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-10 h-10 bg-white border-3 border-gray-800 rounded-full flex items-center justify-center font-black text-gray-800 shadow-lg">
+                    <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-9 h-9 bg-card border-2 border-border rounded-full flex items-center justify-center font-bold text-foreground shadow-md">
                       {zone.id}
                     </div>
                   </div>
