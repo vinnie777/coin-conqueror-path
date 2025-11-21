@@ -23,6 +23,7 @@ const zones = [
     levels: 5,
     completedLevels: 5,
     xp: 500,
+    stars: 5,
     rewards: ["Badge Explorateur", "150 InvestCoins"]
   },
   {
@@ -36,6 +37,7 @@ const zones = [
     levels: 5,
     completedLevels: 3,
     xp: 300,
+    stars: 3,
     rewards: ["Badge Aventurier", "200 InvestCoins", "Power-Up Streak"]
   },
   {
@@ -49,6 +51,7 @@ const zones = [
     levels: 6,
     completedLevels: 0,
     xp: 0,
+    stars: 0,
     rewards: ["Badge Stratège", "250 InvestCoins", "Accès Portfolio"]
   },
   {
@@ -62,6 +65,7 @@ const zones = [
     levels: 7,
     completedLevels: 0,
     xp: 0,
+    stars: 0,
     rewards: ["Badge Investisseur", "300 InvestCoins", "Calculateur ROI"]
   },
   {
@@ -75,6 +79,7 @@ const zones = [
     levels: 6,
     completedLevels: 0,
     xp: 0,
+    stars: 0,
     rewards: ["Badge Capitaliste", "350 InvestCoins", "Tracker Dividendes"]
   },
   {
@@ -88,6 +93,7 @@ const zones = [
     levels: 5,
     completedLevels: 0,
     xp: 0,
+    stars: 0,
     rewards: ["Badge Protecteur", "400 InvestCoins", "Shield Bonus"]
   },
   {
@@ -101,6 +107,7 @@ const zones = [
     levels: 8,
     completedLevels: 0,
     xp: 0,
+    stars: 0,
     rewards: ["Badge Maître", "500 InvestCoins", "Certificat Expert", "Consultation BNP"]
   }
 ];
@@ -272,6 +279,22 @@ const Map = () => {
 
                   {/* Zone Node/Icon */}
                   <div className={`relative ${isLeft ? 'order-1' : 'order-2'}`}>
+                    {/* Stars Display */}
+                    {zone.stars > 0 && (
+                      <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 ${
+                              i < zone.stars
+                                ? 'text-yellow-400 fill-yellow-400'
+                                : 'text-gray-400 fill-gray-300'
+                            } drop-shadow-lg`}
+                          />
+                        ))}
+                      </div>
+                    )}
+                    
                     <div 
                       className={`w-24 h-24 rounded-full flex items-center justify-center text-5xl border-4 shadow-2xl transition-transform duration-300 ${
                         isCurrent 
