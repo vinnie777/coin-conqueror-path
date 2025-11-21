@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, CheckCircle, XCircle, Zap, Award, TrendingUp, Sparkles } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ArrowLeft, CheckCircle, XCircle, Zap, Award, TrendingUp, Sparkles, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.png";
 import zone2Img from "@/assets/zone2-desert.png";
@@ -11,6 +12,7 @@ import quizInflation from "@/assets/quiz-inflation.png";
 import quizRisk from "@/assets/quiz-risk.png";
 import quizAsset from "@/assets/quiz-asset.png";
 import quizDiversification from "@/assets/quiz-diversification.png";
+import quizVideo from "@/assets/quiz-video-day2.mp4";
 
 const quizQuestions = [
   {
@@ -79,11 +81,14 @@ const Quiz = () => {
   const { zoneId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [showVideoDialog, setShowVideoDialog] = useState(true);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<(number | null)[]>(new Array(quizQuestions.length).fill(null));
   const [completed, setCompleted] = useState(false);
+  const [showCorrection, setShowCorrection] = useState(false);
 
   const question = quizQuestions[currentQuestion];
 
@@ -92,6 +97,10 @@ const Quiz = () => {
     
     setSelectedAnswer(answerIndex);
     setShowExplanation(true);
+
+    const newUserAnswers = [...userAnswers];
+    newUserAnswers[currentQuestion] = answerIndex;
+    setUserAnswers(newUserAnswers);
 
     if (answerIndex === question.correctAnswer) {
       setScore(score + 1);
@@ -105,13 +114,107 @@ const Quiz = () => {
       setShowExplanation(false);
     } else {
       setCompleted(true);
-      const earnedCoins = score * 30;
-      toast({
-        title: "Quiz terminé ! 🎉",
-        description: `Tu as obtenu ${score}/${quizQuestions.length} bonnes réponses et gagné ${earnedCoins} InvestCoins !`,
-      });
     }
   };
+
+  // Page de correction
+  if (showCorrection) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
+        <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Correction du Quiz
+            </h1>
+            <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+              <span className="text-sm font-bold">Score: {score}/{quizQuestions.length}</span>
+            </div>
+          </div>
+        </nav>
+
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-4xl mx-auto space-y-6">
+            {quizQuestions.map((q, index) => {
+              const userAnswer = userAnswers[index];
+              const isCorrect = userAnswer === q.correctAnswer;
+              
+              return (
+                <Card key={index} className={`p-6 border-2 ${isCorrect ? 'border-secondary/50' : 'border-destructive/50'}`}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                      isCorrect ? 'bg-secondary' : 'bg-destructive'
+                    }`}>
+                      {isCorrect ? <CheckCircle className="w-6 h-6 text-white" /> : <XCircle className="w-6 h-6 text-white" />}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-lg mb-2">Question {index + 1}</h3>
+                      <p className="text-lg mb-4">{q.question}</p>
+                      
+                      <div className="space-y-2 mb-4">
+                        {q.options.map((option, optIndex) => {
+                          const isUserAnswer = userAnswer === optIndex;
+                          const isCorrectAnswer = optIndex === q.correctAnswer;
+                          
+                          return (
+                            <div
+                              key={optIndex}
+                              className={`p-3 rounded-lg border-2 ${
+                                isCorrectAnswer
+                                  ? 'bg-secondary/20 border-secondary'
+                                  : isUserAnswer
+                                  ? 'bg-destructive/20 border-destructive'
+                                  : 'bg-muted border-border'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className="text-xl">{option.emoji}</span>
+                                <span className={isCorrectAnswer || isUserAnswer ? 'font-bold' : ''}>
+                                  {option.text}
+                                </span>
+                                {isCorrectAnswer && (
+                                  <span className="ml-auto text-secondary font-bold">✓ Bonne réponse</span>
+                                )}
+                                {isUserAnswer && !isCorrectAnswer && (
+                                  <span className="ml-auto text-destructive font-bold">Votre réponse</span>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
+                        <div className="flex items-start gap-2">
+                          <span className="text-2xl">💡</span>
+                          <div>
+                            <h4 className="font-bold mb-1">Explication</h4>
+                            <p className="text-muted-foreground">{q.explanation}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              );
+            })}
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-6">
+              <Link to="/quiz/2" className="flex-1">
+                <Button size="lg" variant="outline" className="w-full">
+                  Refaire le quiz
+                </Button>
+              </Link>
+              <Link to="/map" className="flex-1">
+                <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary">
+                  Continuer l'aventure
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (completed) {
     const earnedCoins = score * 30;
@@ -207,19 +310,16 @@ const Quiz = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/quiz/2" className="flex-1">
-                <Button size="lg" variant="outline" className="w-full">
-                  Refaire le quiz
-                </Button>
-              </Link>
+              <Button 
+                size="lg" 
+                onClick={() => setShowCorrection(true)}
+                className="flex-1 bg-gradient-to-r from-primary to-secondary"
+              >
+                Voir la correction
+              </Button>
               <Link to="/map" className="flex-1">
-                <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary">
-                  Continuer l'aventure
-                </Button>
-              </Link>
-              <Link to="/dashboard" className="flex-1">
                 <Button size="lg" variant="outline" className="w-full">
-                  Tableau de bord
+                  Continuer l'aventure
                 </Button>
               </Link>
             </div>
@@ -231,6 +331,38 @@ const Quiz = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
+      {/* Dialog vidéo de cours */}
+      <Dialog open={showVideoDialog} onOpenChange={setShowVideoDialog}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">
+              🎓 Cours du jour 2 - Les bases de l'investissement
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="aspect-video w-full rounded-lg overflow-hidden bg-black">
+              <video 
+                controls 
+                className="w-full h-full"
+                src={quizVideo}
+              >
+                Votre navigateur ne supporte pas la lecture de vidéos.
+              </video>
+            </div>
+            <p className="text-muted-foreground text-center">
+              Regarde cette vidéo pour mieux comprendre les concepts du quiz
+            </p>
+            <Button 
+              onClick={() => setShowVideoDialog(false)} 
+              className="w-full bg-gradient-to-r from-primary to-secondary"
+              size="lg"
+            >
+              <Play className="w-5 h-5 mr-2" />
+              Commencer le quiz
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
       {/* Navigation */}
       <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -358,21 +490,6 @@ const Quiz = () => {
                 })}
               </div>
 
-              {showExplanation && (
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 border-2 border-primary/20 mb-6 animate-fade-in">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
-                      <span className="text-3xl">💡</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-xl mb-3 flex items-center gap-2">
-                        Explication
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed text-lg">{question.explanation}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {showExplanation && (
                 <Button 
