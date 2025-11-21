@@ -31,12 +31,6 @@ const Index = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-2 sm:px-4 py-8 sm:py-16 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
-          <div className="inline-block">
-            <span className="px-3 sm:px-4 py-1 sm:py-2 rounded-lg bg-primary/10 border border-primary/30 text-xs sm:text-sm font-semibold text-foreground">
-              L'éducation financière gamifiée
-            </span>
-          </div>
-          
           <div className="inline-block bg-gradient-to-r from-primary to-secondary px-4 sm:px-8 py-3 sm:py-6 rounded-lg shadow-premium">
             <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold text-white leading-tight">
               Transforme ton<br />
