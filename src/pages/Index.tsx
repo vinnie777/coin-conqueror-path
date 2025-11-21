@@ -50,12 +50,30 @@ const Index = () => {
           </div>
           
           <div className="bg-white rounded-xl sm:rounded-2xl border-2 sm:border-4 border-border shadow-2xl p-4 sm:p-6 max-w-2xl mx-auto">
-            <p className="text-sm sm:text-lg text-foreground font-bold">
+            <p className="text-sm sm:text-lg text-foreground font-bold mb-4">
               Parcours une carte interactive, complète des défis quotidiens et deviens un expert de la finance tout en t'amusant.
             </p>
+            <ul className="text-left space-y-2 text-sm sm:text-base text-foreground font-semibold">
+              <li className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                <span>7 zones à explorer</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-secondary flex-shrink-0" />
+                <span>Défis quotidiens</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
+                <span>InvestCoins à gagner</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                <span>Classement en temps réel</span>
+              </li>
+            </ul>
           </div>
 
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center pt-2 sm:pt-4 px-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center pt-4 sm:pt-6 px-4">
             <Link to="/map" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-black border-2 sm:border-4 border-primary shadow-2xl text-base sm:text-xl px-6 sm:px-10 py-5 sm:py-7">
                 ▶ COMMENCER L'AVENTURE
@@ -66,26 +84,6 @@ const Index = () => {
                 📊 Tableau de bord
               </Button>
             </Link>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 pt-6 sm:pt-10 max-w-3xl mx-auto">
-            {[
-              { icon: MapPin, label: "7 Zones", value: "à explorer", gradient: "from-primary to-primary" },
-              { icon: Trophy, label: "Défis", value: "quotidiens", gradient: "from-secondary to-secondary" },
-              { icon: Coins, label: "InvestCoins", value: "à gagner", gradient: "from-accent to-accent" },
-              { icon: TrendingUp, label: "Classement", value: "en temps réel", gradient: "from-primary to-secondary" }
-            ].map((stat, i) => (
-              <div 
-                key={i} 
-                className={`p-3 sm:p-6 rounded-xl bg-gradient-to-br ${stat.gradient} border-2 sm:border-4 border-border shadow-2xl transition-all duration-300 hover:scale-110 animate-slide-up`}
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-2 sm:mb-3 mx-auto" />
-                <div className="text-base sm:text-xl font-black text-white">{stat.label}</div>
-                <div className="text-xs sm:text-sm text-white/90 font-bold">{stat.value}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
