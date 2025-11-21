@@ -150,7 +150,7 @@ const Map = () => {
       <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-12 text-center relative z-10">
         <div className="inline-block bg-gradient-to-r from-primary via-primary/90 to-primary px-6 sm:px-12 py-3 sm:py-6 rounded-lg sm:rounded-xl shadow-2xl">
           <h1 className="text-2xl sm:text-5xl font-bold text-primary-foreground tracking-tight">
-            MONDE FINANCIER
+            Le Monde de la Finance
           </h1>
         </div>
         
