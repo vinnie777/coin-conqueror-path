@@ -333,17 +333,17 @@ const Quiz = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
       {/* Dialog vidéo de cours */}
       <Dialog open={showVideoDialog} onOpenChange={setShowVideoDialog}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className="max-w-xl">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">
               🎓 Cours du jour 2 - Les bases de l'investissement
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="aspect-video w-full rounded-lg overflow-hidden bg-black">
+            <div className="w-full rounded-lg overflow-hidden bg-black" style={{ aspectRatio: '9/16' }}>
               <video 
                 controls 
-                className="w-full h-full"
+                className="w-full h-full object-contain"
                 src={quizVideo}
               >
                 Votre navigateur ne supporte pas la lecture de vidéos.
