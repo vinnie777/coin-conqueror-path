@@ -124,54 +124,59 @@ const Map = () => {
 
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2">
           <Link to="/">
-            <Button variant="ghost" size="sm" className="font-bold">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Retour
+            <Button variant="ghost" size="sm" className="font-bold h-8 sm:h-10 px-2 sm:px-4">
+              <ArrowLeft className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Retour</span>
             </Button>
           </Link>
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="Edufin360" className="w-10 h-10" />
+          <div className="flex items-center gap-2 sm:gap-3">
+            <img src={logo} alt="Edufin360" className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-400 border-2 border-yellow-600 shadow-lg">
-              <span className="text-2xl">🪙</span>
-              <span className="font-bold text-lg text-yellow-900">1,250</span>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-400 border-2 border-yellow-600 shadow-lg">
+              <span className="text-lg sm:text-2xl">🪙</span>
+              <span className="font-bold text-sm sm:text-lg text-yellow-900">1,250</span>
             </div>
-            <Link to="/dashboard">
+            <Link to="/dashboard" className="hidden sm:block">
               <Button variant="outline" className="font-bold border-2">Tableau de bord</Button>
+            </Link>
+            <Link to="/dashboard" className="sm:hidden">
+              <Button variant="outline" size="sm" className="font-bold border-2 h-8 px-2">
+                📊
+              </Button>
             </Link>
           </div>
         </div>
       </nav>
 
       {/* World Header */}
-      <div className="container mx-auto px-4 py-8 text-center relative z-10">
-        <div className="inline-block bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 px-8 py-4 rounded-2xl border-4 border-yellow-600 shadow-2xl transform -rotate-1">
-          <h1 className="text-5xl font-black text-yellow-900 tracking-tight" style={{ textShadow: '3px 3px 0px rgba(0,0,0,0.2)' }}>
+      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 text-center relative z-10">
+        <div className="inline-block bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 px-4 sm:px-8 py-2 sm:py-4 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-yellow-600 shadow-2xl transform -rotate-1">
+          <h1 className="text-2xl sm:text-5xl font-black text-yellow-900 tracking-tight" style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.2)' }}>
             MONDE FINANCIER
           </h1>
         </div>
         
         {/* Stats Bar */}
-        <div className="flex items-center justify-center gap-6 mt-6">
-          <div className="flex items-center gap-2 px-6 py-3 bg-white/90 rounded-full border-3 border-gray-800 shadow-lg">
-            <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-            <span className="font-bold text-gray-800">800 XP</span>
+        <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6">
+          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-white/90 rounded-full border-2 sm:border-3 border-gray-800 shadow-lg">
+            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 fill-yellow-500" />
+            <span className="font-bold text-sm sm:text-base text-gray-800">800 XP</span>
           </div>
-          <div className="flex items-center gap-2 px-6 py-3 bg-white/90 rounded-full border-3 border-gray-800 shadow-lg">
-            <Award className="w-5 h-5 text-red-500 fill-red-500" />
-            <span className="font-bold text-gray-800">1/7 Zones</span>
+          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-white/90 rounded-full border-2 sm:border-3 border-gray-800 shadow-lg">
+            <Award className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 fill-red-500" />
+            <span className="font-bold text-sm sm:text-base text-gray-800">1/7 Zones</span>
           </div>
         </div>
       </div>
 
       {/* Game Map Path */}
-      <div className="container mx-auto px-4 pb-20 relative">
+      <div className="container mx-auto px-2 sm:px-4 pb-10 sm:pb-20 relative">
         <div className="max-w-5xl mx-auto relative">
-          {/* SVG Path connecting zones */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+          {/* SVG Path connecting zones - Hidden on mobile for cleaner look */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none hidden sm:block" style={{ zIndex: 0 }}>
             <path
               d="M 150 100 Q 200 150, 250 100 T 450 100 Q 550 150, 650 200 T 850 300 Q 900 400, 800 500 T 450 600 Q 300 650, 150 700"
               stroke="rgba(255,255,255,0.8)"
@@ -183,7 +188,7 @@ const Map = () => {
           </svg>
 
           {/* Zone Nodes */}
-          <div className="relative space-y-32 pt-10" style={{ zIndex: 1 }}>
+          <div className="relative space-y-8 sm:space-y-32 pt-4 sm:pt-10" style={{ zIndex: 1 }}>
             {zones.map((zone, index) => {
               const isUnlocked = zone.status === "unlocked";
               const isCurrent = zone.status === "current";
@@ -204,20 +209,20 @@ const Map = () => {
               return (
                 <div
                   key={zone.id}
-                  className={`flex items-center gap-8 ${isLeft ? 'justify-start' : 'justify-end'} animate-fade-in`}
+                  className={`flex flex-col sm:flex-row items-center gap-3 sm:gap-8 ${isLeft ? 'sm:justify-start' : 'sm:justify-end'} justify-center animate-fade-in`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {/* Zone Content Card */}
                   <Card 
-                    className={`w-80 border-4 shadow-2xl transition-all duration-300 hover:scale-105 ${
+                    className={`w-full sm:w-80 border-2 sm:border-4 shadow-2xl transition-all duration-300 hover:scale-105 ${
                       isCurrent ? 'border-red-500 animate-pulse-glow' :
                       isUnlocked ? 'border-green-500' :
                       'border-gray-400 opacity-60'
-                    } ${isLeft ? 'order-2' : 'order-1'}`}
+                    } ${isLeft ? 'sm:order-2' : 'sm:order-1'}`}
                   >
                     <div className="p-0 overflow-hidden">
                       {/* Zone Image */}
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative h-32 sm:h-48 overflow-hidden">
                         <img 
                           src={zone.image} 
                           alt={zone.name}
@@ -225,23 +230,23 @@ const Map = () => {
                         />
                         {isLocked && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                            <Lock className="w-12 h-12 text-white" />
+                            <Lock className="w-8 h-8 sm:w-12 sm:h-12 text-white" />
                           </div>
                         )}
                       </div>
                       
                       {/* Zone Info */}
-                      <div className="p-4 bg-white">
+                      <div className="p-3 sm:p-4 bg-white">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-black text-xl text-gray-800">{zone.name}</h3>
-                          {isUnlocked && <CheckCircle className="w-6 h-6 text-green-500 fill-green-500" />}
-                          {isCurrent && <Play className="w-6 h-6 text-red-500 fill-red-500 animate-pulse" />}
+                          <h3 className="font-black text-base sm:text-xl text-gray-800">{zone.name}</h3>
+                          {isUnlocked && <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 fill-green-500" />}
+                          {isCurrent && <Play className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 fill-red-500 animate-pulse" />}
                         </div>
-                        <p className="text-sm text-gray-600 mb-3">{zone.description}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2">{zone.description}</p>
                         
                         {/* Progress for unlocked/current zones */}
                         {(isUnlocked || isCurrent) && (
-                          <div className="mb-3">
+                          <div className="mb-2 sm:mb-3">
                             <div className="flex items-center justify-between text-xs mb-1">
                               <span className="font-bold text-gray-700">Niveaux</span>
                               <span className="font-bold text-gray-900">{zone.completedLevels}/{zone.levels}</span>
@@ -259,7 +264,7 @@ const Map = () => {
                         {(isUnlocked || isCurrent) ? (
                           <Link to={`/quiz/${zone.id}`}>
                             <Button 
-                              className={`w-full font-bold border-2 shadow-lg ${
+                              className={`w-full font-bold border-2 shadow-lg text-sm sm:text-base ${
                                 isCurrent 
                                   ? 'bg-gradient-to-r from-red-500 to-orange-500 border-red-700 hover:from-red-600 hover:to-orange-600' 
                                   : 'bg-gradient-to-r from-green-500 to-emerald-500 border-green-700 hover:from-green-600 hover:to-emerald-600'
@@ -269,7 +274,7 @@ const Map = () => {
                             </Button>
                           </Link>
                         ) : (
-                          <Button disabled className="w-full font-bold border-2 border-gray-400 opacity-50">
+                          <Button disabled className="w-full font-bold border-2 border-gray-400 opacity-50 text-sm sm:text-base">
                             🔒 VERROUILLÉ
                           </Button>
                         )}
@@ -278,7 +283,7 @@ const Map = () => {
                   </Card>
 
                   {/* Zone Node/Icon */}
-                  <div className={`relative ${isLeft ? 'order-1' : 'order-2'}`}>
+                  <div className={`relative ${isLeft ? 'sm:order-1' : 'sm:order-2'} hidden sm:block`}>
                     {/* Stars Display */}
                     {zone.stars > 0 && (
                       <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex gap-1">
