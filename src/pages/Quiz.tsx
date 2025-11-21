@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle, Zap, Award, TrendingUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import logo from "@/assets/logo.png";
+import zone2Img from "@/assets/zone2-desert.png";
 
 const quizQuestions = [
   {
@@ -102,48 +104,115 @@ const Quiz = () => {
   };
 
   if (completed) {
+    const earnedCoins = score * 30;
+    const earnedXP = score * 20;
+    const isNewStreak = true;
+    
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex items-center justify-center p-4">
-        <Card className="max-w-2xl w-full p-8 text-center">
-          <div className="mb-6">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-secondary to-green-600 flex items-center justify-center text-5xl">
-              🏆
-            </div>
-            <h2 className="text-4xl font-bold mb-4">Quiz terminé !</h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Tu as obtenu <span className="text-primary font-bold">{score}/{quizQuestions.length}</span> bonnes réponses
-            </p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 mb-8 max-w-md mx-auto">
-            <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
-              <div className="text-3xl mb-2">🪙</div>
-              <div className="text-2xl font-bold text-primary">+{score * 30}</div>
-              <div className="text-sm text-muted-foreground">InvestCoins</div>
-            </div>
-            <div className="p-4 rounded-lg bg-secondary/10 border border-secondary/20">
-              <div className="text-3xl mb-2">🔥</div>
-              <div className="text-2xl font-bold text-secondary">+1</div>
-              <div className="text-sm text-muted-foreground">Jour de Streak</div>
-            </div>
-            <div className="p-4 rounded-lg bg-accent/10 border border-accent/20">
-              <div className="text-3xl mb-2">🏅</div>
-              <div className="text-2xl font-bold text-accent">Badge</div>
-              <div className="text-sm text-muted-foreground">Débloqué</div>
+        <Card className="max-w-3xl w-full overflow-hidden">
+          {/* Header with image */}
+          <div className="relative h-64">
+            <img 
+              src={zone2Img}
+              alt="Quiz complété"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-secondary to-green-600 flex items-center justify-center text-6xl shadow-2xl animate-scale-in">
+                  {score === quizQuestions.length ? "🏆" : score >= 3 ? "🎉" : "💪"}
+                </div>
+                <h2 className="text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                  {score === quizQuestions.length ? "Parfait !" : score >= 3 ? "Bien joué !" : "Continue !"}
+                </h2>
+              </div>
             </div>
           </div>
 
-          <div className="flex gap-4 justify-center">
-            <Link to="/map">
-              <Button size="lg" className="bg-gradient-to-r from-primary to-secondary">
-                Retour à la carte
-              </Button>
-            </Link>
-            <Link to="/dashboard">
-              <Button size="lg" variant="outline">
-                Voir le tableau de bord
-              </Button>
-            </Link>
+          <div className="p-8">
+            <div className="text-center mb-8">
+              <p className="text-2xl mb-2">
+                Tu as obtenu <span className="text-primary font-bold text-3xl">{score}/{quizQuestions.length}</span> bonnes réponses
+              </p>
+              <p className="text-muted-foreground">
+                {score === quizQuestions.length 
+                  ? "Incroyable ! Tu maîtrises parfaitement ce sujet !" 
+                  : score >= 3 
+                  ? "Excellent travail ! Continue comme ça !" 
+                  : "Ne t'inquiète pas, chaque essai te fait progresser !"}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              <div className="p-6 rounded-xl bg-gradient-to-br from-accent/20 to-accent/10 border-2 border-accent/30 text-center">
+                <div className="text-4xl mb-3">🪙</div>
+                <div className="text-3xl font-bold text-accent mb-1">+{earnedCoins}</div>
+                <div className="text-sm text-muted-foreground">InvestCoins</div>
+              </div>
+              
+              <div className="p-6 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/30 text-center">
+                <div className="text-4xl mb-3">⭐</div>
+                <div className="text-3xl font-bold text-primary mb-1">+{earnedXP}</div>
+                <div className="text-sm text-muted-foreground">XP</div>
+              </div>
+              
+              <div className="p-6 rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/10 border-2 border-secondary/30 text-center">
+                <div className="text-4xl mb-3">🔥</div>
+                <div className="text-3xl font-bold text-secondary mb-1">+1</div>
+                <div className="text-sm text-muted-foreground">Jour de Streak</div>
+                {isNewStreak && (
+                  <div className="text-xs text-secondary font-medium mt-1">Nouveau record !</div>
+                )}
+              </div>
+              
+              <div className="p-6 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10 border-2 border-purple-500/30 text-center">
+                <div className="text-4xl mb-3">🏅</div>
+                <div className="text-2xl font-bold mb-1">Badge</div>
+                <div className="text-sm text-muted-foreground">Débloqué</div>
+              </div>
+            </div>
+
+            {/* Progress info */}
+            <div className="p-6 rounded-xl bg-muted/50 border border-border mb-6">
+              <div className="flex items-center gap-3 mb-3">
+                <TrendingUp className="w-5 h-5 text-primary" />
+                <h3 className="font-bold">Ta progression</h3>
+              </div>
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <div className="text-muted-foreground mb-1">Niveau Zone 2</div>
+                  <div className="font-bold">3/5 complétés</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground mb-1">Prochaine zone</div>
+                  <div className="font-bold text-secondary">La Forêt (bientôt)</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground mb-1">Classement</div>
+                  <div className="font-bold text-accent">#42 → #38 📈</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/quiz/2" className="flex-1">
+                <Button size="lg" variant="outline" className="w-full">
+                  Refaire le quiz
+                </Button>
+              </Link>
+              <Link to="/map" className="flex-1">
+                <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary">
+                  Continuer l'aventure
+                </Button>
+              </Link>
+              <Link to="/dashboard" className="flex-1">
+                <Button size="lg" variant="outline" className="w-full">
+                  Tableau de bord
+                </Button>
+              </Link>
+            </div>
           </div>
         </Card>
       </div>
@@ -161,9 +230,18 @@ const Quiz = () => {
               Quitter le quiz
             </Button>
           </Link>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Question</span>
-            <span className="font-bold text-lg">{currentQuestion + 1}/{quizQuestions.length}</span>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="Edufin360" className="w-8 h-8" />
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4 text-accent" />
+              <span className="font-bold">{score * 30}</span>
+              <span className="text-muted-foreground text-xs">coins gagnés</span>
+            </div>
+            <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+              <span className="text-sm font-bold">{currentQuestion + 1}/{quizQuestions.length}</span>
+            </div>
           </div>
         </div>
       </nav>

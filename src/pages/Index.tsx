@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Trophy, Coins, TrendingUp } from "lucide-react";
+import logo from "@/assets/logo.png";
+import zone1 from "@/assets/zone1-bay.png";
+import zone2 from "@/assets/zone2-desert.png";
+import zone3 from "@/assets/zone3-forest.png";
 
 const Index = () => {
   return (
@@ -8,10 +12,8 @@ const Index = () => {
       {/* Navigation */}
       <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-primary-foreground" />
-            </div>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="Edufin360" className="w-12 h-12" />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Edufin360
             </h1>
@@ -86,7 +88,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section with Images */}
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-4xl font-bold text-center mb-16">
@@ -99,31 +101,44 @@ const Index = () => {
                 step: "01",
                 title: "Explore la Carte",
                 description: "Débute ton voyage dans la Baie des Fondamentaux et progresse à travers 7 zones thématiques.",
-                gradient: "from-primary to-blue-600"
+                gradient: "from-primary to-blue-600",
+                image: zone1
               },
               {
                 step: "02",
                 title: "Complète les Défis",
                 description: "Réponds à des quiz, regarde des vidéos et relève des défis quotidiens pour avancer.",
-                gradient: "from-secondary to-green-600"
+                gradient: "from-secondary to-green-600",
+                image: zone2
               },
               {
                 step: "03",
                 title: "Gagne des Récompenses",
                 description: "Accumule des InvestCoins, débloque des badges et grimpe dans le classement.",
-                gradient: "from-accent to-orange-600"
+                gradient: "from-accent to-orange-600",
+                image: zone3
               }
             ].map((feature, i) => (
               <div 
                 key={i}
-                className="relative p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-105 animate-scale-in group"
+                className="relative overflow-hidden rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-105 animate-scale-in group"
                 style={{ animationDelay: `${i * 0.15}s` }}
               >
-                <div className={`absolute -top-4 -left-4 w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white font-bold text-xl shadow-lg`}>
-                  {feature.step}
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                  <div className={`absolute top-4 left-4 w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white font-bold text-xl shadow-lg`}>
+                    {feature.step}
+                  </div>
                 </div>
-                <h4 className="text-2xl font-bold mb-4 mt-4">{feature.title}</h4>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                <div className="p-6">
+                  <h4 className="text-2xl font-bold mb-3">{feature.title}</h4>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                </div>
               </div>
             ))}
           </div>
