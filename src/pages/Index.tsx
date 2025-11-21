@@ -77,7 +77,7 @@ const Index = () => {
       {/* How it Works Section */}
       <section className="container mx-auto px-2 sm:px-4 py-6 sm:py-10 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
+          <h3 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-8 sm:mb-12">
             Comment ça marche ?
           </h3>
           
@@ -87,8 +87,8 @@ const Index = () => {
                 1
               </div>
               <div>
-                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Explore la Carte</h4>
-                <p className="text-base sm:text-lg text-muted-foreground">
+                <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Explore la Carte</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Débute ton voyage dans la Baie des Fondamentaux et progresse à travers 7 zones thématiques.
                 </p>
               </div>
@@ -99,8 +99,8 @@ const Index = () => {
                 2
               </div>
               <div>
-                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Complète les Défis</h4>
-                <p className="text-base sm:text-lg text-muted-foreground">
+                <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Complète les Défis</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Réponds à des quiz, regarde des vidéos et relève des défis quotidiens pour avancer.
                 </p>
               </div>
@@ -111,8 +111,8 @@ const Index = () => {
                 3
               </div>
               <div>
-                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Gagne des Récompenses</h4>
-                <p className="text-base sm:text-lg text-muted-foreground">
+                <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Gagne des Récompenses</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Accumule des InvestCoins, débloque des badges et grimpe dans le classement.
                 </p>
               </div>
