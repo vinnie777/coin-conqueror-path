@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Trophy, Coins, TrendingUp } from "lucide-react";
 import logo from "@/assets/logo.png";
+import bnpLogo from "@/assets/bnp-logo.png";
 import zone1 from "@/assets/zone1-bay.png";
 import zone2 from "@/assets/zone2-desert.png";
 import zone3 from "@/assets/zone3-forest.png";
@@ -11,7 +12,8 @@ const Index = () => {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Navigation */}
       <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-end">
+        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
+          <img src={bnpLogo} alt="BNP Paribas" className="h-8 sm:h-10" />
           <div className="flex gap-2 sm:gap-3">
             <Link to="/news">
               <Button variant="outline" className="font-semibold">News</Button>
