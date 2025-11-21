@@ -38,36 +38,12 @@ const Index = () => {
             <p className="text-sm sm:text-base text-muted-foreground font-medium">L'éducation financière gamifiée</p>
           </div>
           
-          <div className="inline-block bg-gradient-to-r from-primary to-secondary px-4 sm:px-8 py-3 sm:py-6 rounded-lg shadow-premium">
-            <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold text-white leading-tight">
+          <div className="mb-8">
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold text-foreground leading-tight">
               Transforme ton<br />
               Apprentissage Financier<br />
               en Aventure
             </h2>
-          </div>
-          
-          <div className="bg-card rounded-lg border border-border shadow-lg p-4 sm:p-6 max-w-2xl mx-auto">
-            <p className="text-sm sm:text-lg text-foreground font-medium mb-4">
-              Parcours une carte interactive, complète des défis quotidiens et deviens un expert de la finance tout en t'amusant.
-            </p>
-            <ul className="text-left space-y-2 text-sm sm:text-base text-foreground font-medium">
-              <li className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                <span>7 zones à explorer</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-secondary flex-shrink-0" />
-                <span>Défis quotidiens</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
-                <span>InvestCoins à gagner</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                <span>Classement en temps réel</span>
-              </li>
-            </ul>
           </div>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center pt-4 sm:pt-6 px-4">
