@@ -75,7 +75,7 @@ const Index = () => {
       </section>
 
       {/* How it Works Section */}
-      <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-16 relative z-10">
+      <section className="container mx-auto px-2 sm:px-4 py-6 sm:py-10 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
             Comment ça marche ?
