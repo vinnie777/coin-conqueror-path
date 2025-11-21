@@ -476,19 +476,27 @@ const Quiz = () => {
                 >
                   <Card className={`p-6 sm:p-8 text-center border-2 ${
                     selectedAnswer === true && showExplanation
-                      ? 'border-secondary bg-secondary/10'
+                      ? question.correctAnswer ? 'border-secondary bg-secondary/10' : 'border-destructive bg-destructive/10'
                       : selectedAnswer === false && showExplanation
-                      ? 'border-destructive bg-destructive/10'
+                      ? !question.correctAnswer ? 'border-secondary bg-secondary/10' : 'border-destructive bg-destructive/10'
                       : 'border-primary/50'
                   }`}>
-                    <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">
+                    <div className={`text-4xl sm:text-6xl mb-4 sm:mb-6 font-bold ${
+                      showExplanation
+                        ? (selectedAnswer === question.correctAnswer ? 'text-secondary' : 'text-destructive')
+                        : 'text-foreground'
+                    }`}>
                       {selectedAnswer === true && showExplanation ? (
                         question.correctAnswer ? '✓' : '✗'
                       ) : selectedAnswer === false && showExplanation ? (
                         !question.correctAnswer ? '✓' : '✗'
                       ) : '❓'}
                     </div>
-                    <p className="text-lg sm:text-xl font-medium">
+                    <p className={`text-lg sm:text-xl font-medium ${
+                      showExplanation
+                        ? (selectedAnswer === question.correctAnswer ? 'text-secondary' : 'text-destructive')
+                        : 'text-foreground'
+                    }`}>
                       {showExplanation 
                         ? (selectedAnswer === question.correctAnswer ? 'Bonne réponse !' : 'Mauvaise réponse')
                         : 'Vrai ou Faux ?'
