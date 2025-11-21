@@ -148,14 +148,12 @@ const Map = () => {
 
       {/* World Header */}
       <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-12 text-center relative z-10">
-        <div className="inline-block bg-gradient-to-r from-primary via-primary/90 to-primary px-6 sm:px-12 py-3 sm:py-6 rounded-lg sm:rounded-xl shadow-2xl">
-          <h1 className="text-2xl sm:text-5xl font-bold text-primary-foreground tracking-tight">
-            Le Monde de la Finance
-          </h1>
-        </div>
+        <h1 className="text-2xl sm:text-5xl font-bold text-foreground tracking-tight mb-4 sm:mb-6">
+          Le Monde de la Finance
+        </h1>
         
         {/* Classement Button */}
-        <div className="mt-4 sm:mt-6">
+        <div className="mb-4 sm:mb-6">
           <Link to="/classement">
             <Button 
               variant="outline" 
@@ -167,7 +165,7 @@ const Map = () => {
         </div>
         
         {/* Stats Bar */}
-        <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6">
+        <div className="flex items-center justify-center gap-3 sm:gap-6">
           <div className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-card/90 backdrop-blur rounded-lg border border-border shadow-md">
             <Star className="w-4 h-4 sm:w-5 sm:h-5 text-secondary fill-secondary" />
             <span className="font-semibold text-sm sm:text-base text-foreground">800 XP</span>
