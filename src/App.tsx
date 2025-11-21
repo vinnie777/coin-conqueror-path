@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import Map from "./pages/Map";
 import Quiz from "./pages/Quiz";
 import Dashboard from "./pages/Dashboard";
+import Portfolio from "./pages/Portfolio";
+import Referral from "./pages/Referral";
+import BankingServices from "./pages/BankingServices";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +25,9 @@ const App = () => (
           <Route path="/map" element={<Map />} />
           <Route path="/quiz/:zoneId" element={<Quiz />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/referral" element={<Referral />} />
+          <Route path="/banking" element={<BankingServices />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

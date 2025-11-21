@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, TrendingUp, Trophy, Coins, Flame, MapPin, Star } from "lucide-react";
+import { ArrowLeft, TrendingUp, Trophy, Coins, Flame, MapPin, Star, Briefcase, Users, Building2 } from "lucide-react";
 import logo from "@/assets/logo.png";
 import zone2Img from "@/assets/zone2-desert.png";
 
@@ -35,6 +35,51 @@ const Dashboard = () => {
             <h1 className="text-4xl font-bold mb-2">Tableau de bord</h1>
             <p className="text-muted-foreground">Continue ta progression et deviens un expert !</p>
           </div>
+        </div>
+
+        {/* Quick Navigation */}
+        <div className="grid sm:grid-cols-3 gap-4 mb-8">
+          <Link to="/portfolio">
+            <Card className="p-4 border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <Briefcase className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div className="font-bold text-lg">Portfolio</div>
+                  <div className="text-xs text-muted-foreground">Gère tes investissements</div>
+                </div>
+              </div>
+            </Card>
+          </Link>
+
+          <Link to="/referral">
+            <Card className="p-4 border-2 border-secondary/20 hover:border-secondary/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-accent flex items-center justify-center">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div className="font-bold text-lg">Parrainage</div>
+                  <div className="text-xs text-muted-foreground">Gagne des coins</div>
+                </div>
+              </div>
+            </Card>
+          </Link>
+
+          <Link to="/banking">
+            <Card className="p-4 border-2 border-accent/20 hover:border-accent/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                  <Building2 className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div className="font-bold text-lg">BNP Privée</div>
+                  <div className="text-xs text-muted-foreground">Services bancaires</div>
+                </div>
+              </div>
+            </Card>
+          </Link>
         </div>
 
         {/* Stats Cards */}
