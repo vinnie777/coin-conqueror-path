@@ -16,62 +16,32 @@ import quizVideo from "@/assets/quiz-video-day2.mp4";
 
 const quizQuestions = [
   {
-    question: "Qu'est-ce que le rendement d'un investissement ?",
-    options: [
-      { text: "Le gain ou la perte financière générée par un investissement", emoji: "📈" },
-      { text: "Le montant initial investi", emoji: "💰" },
-      { text: "Le temps nécessaire pour doubler son investissement", emoji: "⏰" },
-      { text: "Le niveau de risque associé à un investissement", emoji: "⚠️" }
-    ],
-    correctAnswer: 0,
+    question: "Le rendement d'un investissement représente le gain ou la perte financière générée",
+    correctAnswer: true,
     explanation: "Le rendement représente le gain ou la perte générée par un investissement, généralement exprimé en pourcentage du capital initial.",
     image: quizReturn
   },
   {
-    question: "Qu'est-ce que l'inflation ?",
-    options: [
-      { text: "La hausse des taux d'intérêt", emoji: "📊" },
-      { text: "L'augmentation générale des prix au fil du temps", emoji: "🛒" },
-      { text: "La baisse de la valeur des actions", emoji: "📉" },
-      { text: "L'augmentation des salaires", emoji: "💵" }
-    ],
-    correctAnswer: 1,
+    question: "L'inflation est l'augmentation générale des prix au fil du temps",
+    correctAnswer: true,
     explanation: "L'inflation est l'augmentation générale et durable des prix des biens et services, ce qui réduit le pouvoir d'achat de la monnaie.",
     image: quizInflation
   },
   {
-    question: "Quelle est la relation entre risque et rendement ?",
-    options: [
-      { text: "Plus le risque est élevé, plus le rendement potentiel est faible", emoji: "📉" },
-      { text: "Le risque et le rendement ne sont pas liés", emoji: "❓" },
-      { text: "Plus le risque est élevé, plus le rendement potentiel est élevé", emoji: "🎯" },
-      { text: "Le risque élimine toujours le rendement", emoji: "⛔" }
-    ],
-    correctAnswer: 2,
+    question: "Plus le risque d'un investissement est élevé, plus le rendement potentiel est élevé",
+    correctAnswer: true,
     explanation: "En général, plus un investissement est risqué, plus le rendement potentiel est élevé pour compenser ce risque pris par l'investisseur.",
     image: quizRisk
   },
   {
-    question: "Qu'est-ce qu'un actif ?",
-    options: [
-      { text: "Une dette à rembourser", emoji: "💳" },
-      { text: "Un bien ou un placement qui a une valeur économique", emoji: "🏢" },
-      { text: "Un prêt accordé par une banque", emoji: "🏦" },
-      { text: "Une dépense mensuelle", emoji: "📝" }
-    ],
-    correctAnswer: 1,
-    explanation: "Un actif est un bien ou un placement qui possède une valeur économique et qui peut générer des revenus ou prendre de la valeur.",
+    question: "Un actif est une dette à rembourser",
+    correctAnswer: false,
+    explanation: "Un actif est un bien ou un placement qui possède une valeur économique et qui peut générer des revenus ou prendre de la valeur. Une dette est un passif, pas un actif.",
     image: quizAsset
   },
   {
-    question: "Pourquoi est-il important de diversifier ses investissements ?",
-    options: [
-      { text: "Pour augmenter les frais de gestion", emoji: "💸" },
-      { text: "Pour compliquer la gestion du portefeuille", emoji: "🤔" },
-      { text: "Pour réduire le risque global", emoji: "🛡️" },
-      { text: "Pour garantir des pertes", emoji: "❌" }
-    ],
-    correctAnswer: 2,
+    question: "Diversifier ses investissements permet de réduire le risque global",
+    correctAnswer: true,
     explanation: "La diversification permet de répartir les risques en investissant dans différents types d'actifs, réduisant ainsi l'impact d'une mauvaise performance d'un seul investissement.",
     image: quizDiversification
   }
@@ -83,26 +53,58 @@ const Quiz = () => {
   const { toast } = useToast();
   const [showVideoDialog, setShowVideoDialog] = useState(true);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<(number | null)[]>(new Array(quizQuestions.length).fill(null));
+  const [userAnswers, setUserAnswers] = useState<(boolean | null)[]>(new Array(quizQuestions.length).fill(null));
   const [completed, setCompleted] = useState(false);
   const [showCorrection, setShowCorrection] = useState(false);
+  const [swipeStartX, setSwipeStartX] = useState<number>(0);
+  const [swipeOffset, setSwipeOffset] = useState<number>(0);
+  const [isAnswering, setIsAnswering] = useState(false);
 
   const question = quizQuestions[currentQuestion];
 
-  const handleAnswer = (answerIndex: number) => {
+  const handleSwipeStart = (clientX: number) => {
+    if (showExplanation || isAnswering) return;
+    setSwipeStartX(clientX);
+  };
+
+  const handleSwipeMove = (clientX: number) => {
+    if (showExplanation || isAnswering || swipeStartX === 0) return;
+    const offset = clientX - swipeStartX;
+    setSwipeOffset(offset);
+  };
+
+  const handleSwipeEnd = () => {
+    if (showExplanation || isAnswering) {
+      setSwipeOffset(0);
+      return;
+    }
+
+    const threshold = 100; // pixels nécessaires pour valider le swipe
+    
+    if (Math.abs(swipeOffset) > threshold) {
+      setIsAnswering(true);
+      const answer = swipeOffset > 0; // true si swipe à droite (oui), false si à gauche (non)
+      handleAnswer(answer);
+    }
+    
+    setSwipeOffset(0);
+    setSwipeStartX(0);
+  };
+
+  const handleAnswer = (answer: boolean) => {
     if (showExplanation) return;
     
-    setSelectedAnswer(answerIndex);
+    setSelectedAnswer(answer);
     setShowExplanation(true);
 
     const newUserAnswers = [...userAnswers];
-    newUserAnswers[currentQuestion] = answerIndex;
+    newUserAnswers[currentQuestion] = answer;
     setUserAnswers(newUserAnswers);
 
-    if (answerIndex === question.correctAnswer) {
+    if (answer === question.correctAnswer) {
       setScore(score + 1);
     }
   };
@@ -112,6 +114,7 @@ const Quiz = () => {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
+      setIsAnswering(false);
     } else {
       setCompleted(true);
     }
@@ -151,36 +154,47 @@ const Quiz = () => {
                       <p className="text-lg mb-4">{q.question}</p>
                       
                       <div className="space-y-2 mb-4">
-                        {q.options.map((option, optIndex) => {
-                          const isUserAnswer = userAnswer === optIndex;
-                          const isCorrectAnswer = optIndex === q.correctAnswer;
-                          
-                          return (
-                            <div
-                              key={optIndex}
-                              className={`p-3 rounded-lg border-2 ${
-                                isCorrectAnswer
-                                  ? 'bg-secondary/20 border-secondary'
-                                  : isUserAnswer
-                                  ? 'bg-destructive/20 border-destructive'
-                                  : 'bg-muted border-border'
-                              }`}
-                            >
-                              <div className="flex items-center gap-2">
-                                <span className="text-xl">{option.emoji}</span>
-                                <span className={isCorrectAnswer || isUserAnswer ? 'font-bold' : ''}>
-                                  {option.text}
-                                </span>
-                                {isCorrectAnswer && (
-                                  <span className="ml-auto text-secondary font-bold">✓ Bonne réponse</span>
-                                )}
-                                {isUserAnswer && !isCorrectAnswer && (
-                                  <span className="ml-auto text-destructive font-bold">Votre réponse</span>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
+                        <div
+                          className={`p-3 rounded-lg border-2 ${
+                            q.correctAnswer
+                              ? 'bg-secondary/20 border-secondary'
+                              : 'bg-muted border-border'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-xl">✓</span>
+                            <span className={q.correctAnswer ? 'font-bold' : ''}>
+                              Vrai
+                            </span>
+                            {q.correctAnswer && (
+                              <span className="ml-auto text-secondary font-bold">Bonne réponse</span>
+                            )}
+                            {userAnswer === true && !q.correctAnswer && (
+                              <span className="ml-auto text-destructive font-bold">Votre réponse</span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div
+                          className={`p-3 rounded-lg border-2 ${
+                            !q.correctAnswer
+                              ? 'bg-secondary/20 border-secondary'
+                              : 'bg-muted border-border'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-xl">✗</span>
+                            <span className={!q.correctAnswer ? 'font-bold' : ''}>
+                              Faux
+                            </span>
+                            {!q.correctAnswer && (
+                              <span className="ml-auto text-secondary font-bold">Bonne réponse</span>
+                            )}
+                            {userAnswer === false && q.correctAnswer && (
+                              <span className="ml-auto text-destructive font-bold">Votre réponse</span>
+                            )}
+                          </div>
+                        </div>
                       </div>
 
                       <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
@@ -333,10 +347,10 @@ const Quiz = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
       {/* Dialog vidéo de cours */}
       <Dialog open={showVideoDialog} onOpenChange={setShowVideoDialog}>
-        <DialogContent className="max-w-xl">
+        <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold">
-              🎓 Cours du jour 2 - Les bases de l'investissement
+            <DialogTitle className="text-xl font-bold">
+              🎓 Cours du jour 2
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
@@ -349,8 +363,8 @@ const Quiz = () => {
                 Votre navigateur ne supporte pas la lecture de vidéos.
               </video>
             </div>
-            <p className="text-muted-foreground text-center">
-              Regarde cette vidéo pour mieux comprendre les concepts du quiz
+            <p className="text-sm text-muted-foreground text-center">
+              Regarde cette vidéo pour mieux comprendre les concepts
             </p>
             <Button 
               onClick={() => setShowVideoDialog(false)} 
@@ -433,62 +447,111 @@ const Quiz = () => {
             </div>
 
             <div className="p-8">
-              <div className="grid md:grid-cols-2 gap-4 mb-8">
-                {question.options.map((option, index) => {
-                  const isSelected = selectedAnswer === index;
-                  const isCorrect = index === question.correctAnswer;
-                  const showCorrect = showExplanation && isCorrect;
-                  const showWrong = showExplanation && isSelected && !isCorrect;
+              {/* Instructions de swipe */}
+              {!showExplanation && (
+                <div className="mb-6 p-4 rounded-lg bg-muted/50 border border-border">
+                  <p className="text-center text-sm text-muted-foreground">
+                    👈 Swipe à gauche pour <span className="font-bold text-destructive">Faux</span> • 
+                    Swipe à droite pour <span className="font-bold text-secondary">Vrai</span> 👉
+                  </p>
+                </div>
+              )}
 
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => handleAnswer(index)}
-                      disabled={showExplanation}
-                      className={`group relative p-6 rounded-2xl text-left transition-all duration-300 transform ${
-                        showCorrect
-                          ? "bg-gradient-to-br from-secondary/30 to-secondary/10 border-2 border-secondary scale-105 shadow-xl"
-                          : showWrong
-                          ? "bg-gradient-to-br from-destructive/30 to-destructive/10 border-2 border-destructive scale-95 opacity-60"
-                          : isSelected
-                          ? "bg-gradient-to-br from-primary/30 to-primary/10 border-2 border-primary scale-105 shadow-lg"
-                          : "bg-gradient-to-br from-card to-muted/30 border-2 border-border hover:border-primary/50 hover:scale-105 hover:shadow-lg"
-                      } ${showExplanation ? "cursor-not-allowed" : "cursor-pointer hover:-translate-y-1"}`}
-                    >
-                      {/* Emoji badge */}
-                      <div className={`absolute -top-3 -left-3 w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-lg transition-transform duration-300 ${
-                        showCorrect ? "bg-secondary scale-110" :
-                        showWrong ? "bg-destructive/80 scale-90" :
-                        isSelected ? "bg-primary" :
-                        "bg-gradient-to-br from-accent to-accent/70 group-hover:scale-110"
-                      }`}>
-                        {option.emoji}
-                      </div>
+              {/* Card swipeable */}
+              <div
+                className="relative touch-none select-none"
+                onMouseDown={(e) => handleSwipeStart(e.clientX)}
+                onMouseMove={(e) => handleSwipeMove(e.clientX)}
+                onMouseUp={handleSwipeEnd}
+                onMouseLeave={handleSwipeEnd}
+                onTouchStart={(e) => handleSwipeStart(e.touches[0].clientX)}
+                onTouchMove={(e) => handleSwipeMove(e.touches[0].clientX)}
+                onTouchEnd={handleSwipeEnd}
+              >
+                <div
+                  className="transition-transform duration-200"
+                  style={{
+                    transform: `translateX(${swipeOffset}px) rotate(${swipeOffset * 0.05}deg)`,
+                  }}
+                >
+                  <Card className={`p-8 text-center border-2 ${
+                    selectedAnswer === true && showExplanation
+                      ? 'border-secondary bg-secondary/10'
+                      : selectedAnswer === false && showExplanation
+                      ? 'border-destructive bg-destructive/10'
+                      : 'border-primary/50'
+                  }`}>
+                    <div className="text-6xl mb-6">
+                      {selectedAnswer === true && showExplanation ? (
+                        question.correctAnswer ? '✓' : '✗'
+                      ) : selectedAnswer === false && showExplanation ? (
+                        !question.correctAnswer ? '✓' : '✗'
+                      ) : '❓'}
+                    </div>
+                    <p className="text-xl font-medium">
+                      {showExplanation 
+                        ? (selectedAnswer === question.correctAnswer ? 'Bonne réponse !' : 'Mauvaise réponse')
+                        : 'Vrai ou Faux ?'
+                      }
+                    </p>
+                  </Card>
+                </div>
 
-                      <div className="flex items-start justify-between gap-4 mt-2">
-                        <span className="text-lg font-medium leading-snug pr-4">{option.text}</span>
-                        <div className="flex-shrink-0">
-                          {showCorrect && (
-                            <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center animate-scale-in">
-                              <CheckCircle className="w-5 h-5 text-white" />
-                            </div>
-                          )}
-                          {showWrong && (
-                            <div className="w-8 h-8 rounded-full bg-destructive flex items-center justify-center animate-scale-in">
-                              <XCircle className="w-5 h-5 text-white" />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Hover glow effect */}
-                      {!showExplanation && (
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                      )}
-                    </button>
-                  );
-                })}
+                {/* Indicateurs de direction pendant le swipe */}
+                {swipeOffset < -50 && !showExplanation && (
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full px-4">
+                    <div className="bg-destructive text-white px-6 py-3 rounded-lg font-bold animate-pulse">
+                      FAUX
+                    </div>
+                  </div>
+                )}
+                {swipeOffset > 50 && !showExplanation && (
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full px-4">
+                    <div className="bg-secondary text-white px-6 py-3 rounded-lg font-bold animate-pulse">
+                      VRAI
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Boutons alternatifs */}
+              {!showExplanation && (
+                <div className="grid grid-cols-2 gap-4 mt-6">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => handleAnswer(false)}
+                    className="border-2 border-destructive/50 hover:bg-destructive/10 hover:border-destructive text-lg py-6"
+                  >
+                    <XCircle className="w-5 h-5 mr-2" />
+                    Faux
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => handleAnswer(true)}
+                    className="border-2 border-secondary/50 hover:bg-secondary/10 hover:border-secondary text-lg py-6"
+                  >
+                    <CheckCircle className="w-5 h-5 mr-2" />
+                    Vrai
+                  </Button>
+                </div>
+              )}
+
+              {/* Explication */}
+              {showExplanation && (
+                <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 border-2 border-primary/20 animate-fade-in">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <span className="text-3xl">💡</span>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-xl mb-3">Explication</h3>
+                      <p className="text-muted-foreground leading-relaxed text-lg">{question.explanation}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
 
 
               {showExplanation && (
